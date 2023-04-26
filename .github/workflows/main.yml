@@ -28,7 +28,7 @@ jobs:
       run: deck version
 
     - name: Backup existing configuration for a specific tag
-      run: deck dump --select-tag se-deck-flow -o kong-dev.yaml --tls-skip-verify
+      run: deck dump -o kong-dev.yaml --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -37,20 +37,20 @@ jobs:
       run: deck validate -s ./deck
 
     - name: Compare Configurations
-      run: deck diff --select-tag se-deck-flow  -s ./deck --tls-skip-verify
+      run: deck diff  -s ./deck --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Apply new configuration
-      run: deck sync  --select-tag se-deck-flow -s ./deck --tls-skip-verify
+      run: deck sync  -s ./deck --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Back out changes on failure
       if: ${{ failure() }}
-      run: deck sync  --select-tag se-deck-flow -s kong-dev.yaml  --tls-skip-verify
+      run: deck sync  -s kong-dev.yaml  --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
