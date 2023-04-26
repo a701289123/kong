@@ -8,14 +8,21 @@ on:
       - README.md 
 
 jobs:
- deck-sync:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Setup decK
-      uses: kong/setup-decK@v1
+ deploy_to_clouds:
+    runs-on: ubuntu-latest
+    name: Deploying Kong Configuration
+    environment: play
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
+    - name: Setup Node
+      uses: actions/setup-node@v3.5.1
       with:
-        deck-version: "1.8.0"
-    - name: Clone repo
-      uses: actions/checkout@v2
+        node-version: "16"
+    - name: Install decK
+      run: |
+        curl -sL https://github.com/kong/deck/releases/download/v1.5.1/deck_1.5.1_linux_amd64.tar.gz -o deck.tar.gz
+        tar -xf deck.tar.gz -C /tmp
+        cp /tmp/deck /usr/local/bin/
     - name: Run deck deck-sync
       run: decK sync --kong-addr ${{ secrets.KONG_ADMIN_API_URL }}
