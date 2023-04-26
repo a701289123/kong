@@ -22,8 +22,7 @@ services:
     name: E2A2
     path_handling: v0
     paths:
-    - /123qwe
-    - /456
+    - /test
     preserve_host: false
     protocols:
     - http
