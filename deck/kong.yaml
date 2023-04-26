@@ -19,10 +19,10 @@ services:
   retries: 5
   routes:
   - https_redirect_status_code: 426
-    name: E2A
+    name: E2A2
     path_handling: v0
     paths:
-    - /test
+    - /123qwe
     preserve_host: false
     protocols:
     - http
@@ -32,7 +32,7 @@ services:
     response_buffering: true
     strip_path: true
   - https_redirect_status_code: 426
-    name: E2AClickstream1
+    name: E2AClickstream12
     path_handling: v0
     paths:
     - ~/ai/v2/tracking/(?<bu>[^/]+)/events
