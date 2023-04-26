@@ -26,7 +26,7 @@ services:
     paths:
     - /test
     - /baz
-    - /xyz123
+    - /xyz12345
     preserve_host: false
     protocols:
     - http
