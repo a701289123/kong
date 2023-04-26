@@ -23,6 +23,7 @@ services:
     path_handling: v0
     paths:
     - /123qwe
+    - /456
     preserve_host: false
     protocols:
     - http
