@@ -35,23 +35,23 @@ jobs:
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Validate Deck Config File
-      run: deck validate -s ./deck
+      run: deck validate -w test1 -s ./deck
 
     - name: Compare Configurations
-      run: deck diff  -s ./deck --tls-skip-verify
+      run: deck diff -w test1  -s ./deck --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Apply new configuration
-      run: deck sync  -s ./deck --tls-skip-verify
+      run: deck sync -w test1  -s ./deck --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Back out changes on failure
       if: ${{ failure() }}
-      run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+      run: deck sync -w test1  -s kong-dev.yaml  --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
