@@ -22,7 +22,9 @@ services:
     name: E2A2
     path_handling: v0
     paths:
-    - /test
+    - /test    
+    - /baz
+    - /xyz
     preserve_host: false
     protocols:
     - http
