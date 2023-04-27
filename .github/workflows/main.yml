@@ -35,7 +35,7 @@ jobs:
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Validate Deck Config File
-      run: deck validate -w test1 -s ./deck
+      run: deck validate -s ./deck
 
     - name: Compare Configurations
       run: deck diff -w test1  -s ./deck --tls-skip-verify
