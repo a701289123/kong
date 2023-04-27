@@ -23,7 +23,7 @@ services:
     name: E2AE2A
     path_handling: v0
     paths:
-    - /haha    
+    - /123/test/abc    
     preserve_host: false
     protocols:
     - http
