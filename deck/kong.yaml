@@ -33,7 +33,7 @@ services:
     response_buffering: true
     strip_path: true
   - https_redirect_status_code: 426
-    name: E2AClickstream100
+    name: E2AClickstream10
     path_handling: v0
     paths:
     - ~/ai/v2/tracking/(?<bu>[^/]+)/events
