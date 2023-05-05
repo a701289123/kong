@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy_to_clouds:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: Deploying Kong Configuration
     environment: play
     steps:
