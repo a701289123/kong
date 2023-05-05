@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy_to_clouds:
-    runs-on: kong-test
+    runs-on: kong
     name: Deploying Kong Configuration
     environment: play
     steps:
