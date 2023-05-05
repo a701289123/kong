@@ -23,7 +23,7 @@ services:
     name: E2AClickstream-test
     path_handling: v0
     paths:
-    - ~/test/v2/tracking/(?<bu>[^/]+)/events
+    - ~/test/v2/tracking/(?<bu>[^/]+)/events/test
     plugins:
     - config:
         content_type: application/json
