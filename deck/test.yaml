@@ -28,7 +28,7 @@ plugins:
   - https
 routes:
 - https_redirect_status_code: 426
-  name: test2-0704
+  name: test2-07042
   path_handling: v0
   paths:
   - /test/aes
