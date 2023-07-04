@@ -32,7 +32,7 @@ jobs:
       run: deck dump -o kong-dev.yaml --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
-        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+        # DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Validate Deck Config File
       run: deck validate -s ./deck
@@ -41,17 +41,17 @@ jobs:
       run: deck diff  -s ./deck --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
-        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+        # DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Apply new configuration
       run: deck sync  -s ./deck --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
-        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+        # DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Back out changes on failure
       if: ${{ failure() }}
       run: deck sync  -s kong-dev.yaml  --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
-        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+        # DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
