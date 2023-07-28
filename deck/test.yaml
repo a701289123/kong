@@ -1,342 +1,63 @@
-_format_version: "3.0"
-plugins:
-- config:
-    content_type: application/json
-    custom_fields_by_lua: {}
-    flush_timeout: null
-    headers: {}
-    http_endpoint: http://192.168.133.140:5004
-    keepalive: 60000
-    method: POST
-    queue:
-      initial_retry_delay: 0.01
-      max_batch_size: 1
-      max_bytes: null
-      max_coalescing_delay: 1
-      max_entries: 10000
-      max_retry_delay: 60
-      max_retry_time: 60
-    queue_size: null
-    retry_count: null
-    timeout: 10000
-  enabled: true
-  name: http-log
-  protocols:
-  - grpc
-  - grpcs
-  - http
-  - https
-routes:
-- https_redirect_status_code: 426
-  name: test2
-  path_handling: v0
-  paths:
-  - /test/aes
-  plugins:
-  - config:
-      cleartext: null
-      iv: null
-      key: null
-    enabled: true
-    name: js-b2bencryption
-    protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  - config:
-      access: []
-      body_filter:
-      - |
-        kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
-      certificate: []
-      header_filter: []
-      log: []
-      rewrite: []
-      ws_client_frame: []
-      ws_close: []
-      ws_handshake: []
-      ws_upstream_frame: []
-    enabled: true
-    name: post-function
-    protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  - config:
-      access:
-      - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
-      body_filter: []
-      certificate: []
-      header_filter: []
-      log: []
-      rewrite: []
-      ws_client_frame: []
-      ws_close: []
-      ws_handshake: []
-      ws_upstream_frame: []
-    enabled: true
-    name: pre-function
-    protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  preserve_host: false
-  protocols:
-  - http
-  - https
-  regex_priority: 0
-  request_buffering: true
-  response_buffering: true
-  strip_path: true
-- https_redirect_status_code: 426
-  name: test3
-  path_handling: v0
-  paths:
-  - /test3/aesd
-  plugins:
-  - config:
-      cleartext: null
-      iv: null
-      key: null
-    enabled: true
-    name: js-b2bdecryption
-    protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  - config:
-      access: []
-      body_filter:
-      - |
-        kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
-      certificate: []
-      header_filter: []
-      log: []
-      rewrite: []
-      ws_client_frame: []
-      ws_close: []
-      ws_handshake: []
-      ws_upstream_frame: []
-    enabled: true
-    name: post-function
-    protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  - config:
-      access:
-      - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
-      body_filter: []
-      certificate: []
-      header_filter: []
-      log: []
-      rewrite: []
-      ws_client_frame: []
-      ws_close: []
-      ws_handshake: []
-      ws_upstream_frame: []
-    enabled: true
-    name: pre-function
-    protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  preserve_host: false
-  protocols:
-  - http
-  - https
-  regex_priority: 0
-  request_buffering: true
-  response_buffering: true
-  strip_path: true
+_format_version: "1.1"
 services:
 - connect_timeout: 60000
-  enabled: true
-  host: func-o2ai-wtchk-prod-eastasia.azurewebsites.net
-  name: prodrecomm
-  path: /api/wtchk/prodrecomm/orderHistory/category
-  port: 443
-  protocol: https
-  read_timeout: 60000
-  retries: 5
-  routes:
-  - https_redirect_status_code: 426
-    name: prodrecomm
-    path_handling: v0
-    paths:
-    - /prodrecomm
-    plugins:
-    - config:
-        body: {}
-        header: {}
-        method: POST
-        target: http://192.168.133.143:8000/test/aes
-      enabled: false
-      name: js-servicecallout-tokenencrypt
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    preserve_host: false
-    protocols:
-    - http
-    - https
-    regex_priority: 0
-    request_buffering: true
-    response_buffering: true
-    strip_path: true
-  write_timeout: 60000
-- connect_timeout: 60000
-  enabled: true
-  host: api.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
-  name: product
-  path: /api/v2/wtcmy/products/10227
-  port: 443
-  protocol: https
-  read_timeout: 60000
-  retries: 5
-  routes:
-  - https_redirect_status_code: 426
-    name: product
-    path_handling: v0
-    paths:
-    - /b2b/product
-    plugins:
-    - config:
-        access:
-        - |2
-           return kong.response.exit(200, "Success")
-        body_filter: []
-        certificate: []
-        header_filter: []
-        log: []
-        rewrite: []
-        ws_client_frame: []
-        ws_close: []
-        ws_handshake: []
-        ws_upstream_frame: []
-      enabled: true
-      name: post-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    preserve_host: false
-    protocols:
-    - http
-    - https
-    regex_priority: 0
-    request_buffering: true
-    response_buffering: true
-    strip_path: true
-  write_timeout: 60000
-- connect_timeout: 60000
-  enabled: true
-  host: func-o2ai-wtchk-prod-eastasia.azurewebsites.net
-  name: serach
-  path: /api/wtchk/searchTermDictionary
-  port: 443
-  protocol: https
-  read_timeout: 60000
-  retries: 5
-  routes:
-  - https_redirect_status_code: 426
-    name: search
-    path_handling: v0
-    paths:
-    - /searchTermDictionary
-    preserve_host: false
-    protocols:
-    - http
-    - https
-    regex_priority: 0
-    request_buffering: true
-    response_buffering: true
-    strip_path: true
-  write_timeout: 60000
-- connect_timeout: 60000
-  enabled: true
   host: pkc-5m9gg.eastasia.azure.confluent.cloud
-  name: test
-  path: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-usrbehavior-batch-wtchk-dev/records
+  name: E2AClickstream1-wtchk4
+  path: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-recomm-masked-wtchk-dev/records
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  write_timeout: 60000
+- connect_timeout: 60000
+  host: pkc-5m9gg.eastasia.azure.confluent.cloud
+  name: E2AClickstream1-wtctw4
+  path: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-recomm-masked-wtctw-dev/records
   port: 443
   protocol: https
   read_timeout: 60000
   retries: 5
   routes:
   - https_redirect_status_code: 426
-    name: test
+    name: E2A10-0728
     path_handling: v0
     paths:
-    - /kf/v6/tracking/wtchk/events
+    - /haha
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: E2AClickstream10
+    path_handling: v0
+    paths:
+    - ~/ai/v2/tracking/(?<bu>[^/]+)/events
     plugins:
     - config:
-        iv: FcJaNdRgUkXn2r5u
-        key: KbPeShVmYq3t6w9z$C&F2J@NcQfTjWnZ
-        plaintext: null
-      enabled: false
-      name: js-en
-      ordering:
-        after:
-          access:
-          - pre-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    - config:
-        iv: bQeThWmZq4t6w9z$
-        key: s5v8y/A?D(G-KbPeShVmYq3t6w9z$C&E
-      enabled: false
-      name: js-encryptionbody
-      ordering:
-        after:
-          access:
-          - pre-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    - config:
-        body: {}
-        header: {}
-        target: http://192.168.133.143:8000/test3/aesd
+        content_type: application/json
+        custom_fields_by_lua: {}
+        flush_timeout: 2
+        headers: {}
+        http_endpoint: http://192.168.133.134:31311
+        keepalive: 60000
+        method: POST
+        queue:
+          initial_retry_delay: 0.01
+          max_batch_size: 1
+          max_bytes: null
+          max_coalescing_delay: 1
+          max_entries: 10000
+          max_retry_delay: 60
+          max_retry_time: 60
+        queue_size: 1
+        retry_count: 10
+        timeout: 10000
       enabled: true
-      name: js-servicecallout-refresh-decrpt
-      ordering:
-        before:
-          access:
-          - pre-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    - config:
-        access:
-        - kong.log.set_serialize_value("request.body2", kong.request.get_raw_body())
-        body_filter:
-        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
-        certificate: []
-        header_filter: []
-        log: []
-        rewrite: []
-        ws_client_frame: []
-        ws_close: []
-        ws_handshake: []
-        ws_upstream_frame: []
-      enabled: true
-      name: post-function
+      name: http-log
       protocols:
       - grpc
       - grpcs
@@ -345,122 +66,32 @@ services:
     - config:
         access:
         - |-
-          local ok, err = kong.service.request.set_body({
-            value = {
-               type = "JSON",
-               data = kong.request.get_body("application/json")
-            }
-          }, "application/json")
-          kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
-        body_filter: []
-        certificate: []
-        header_filter: []
-        log: []
-        rewrite: []
-        ws_client_frame: []
-        ws_close: []
-        ws_handshake: []
-        ws_upstream_frame: []
-      enabled: true
-      name: pre-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    preserve_host: false
-    protocols:
-    - http
-    - https
-    regex_priority: 0
-    request_buffering: true
-    response_buffering: true
-    strip_path: true
-  write_timeout: 60000
-- connect_timeout: 60000
-  enabled: true
-  host: api.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
-  name: token
-  path: /authorizationserver/oauth/token
-  port: 443
-  protocol: https
-  read_timeout: 60000
-  retries: 5
-  routes:
-  - https_redirect_status_code: 426
-    name: token
-    path_handling: v0
-    paths:
-    - ~/b2b/v2/users/(?<bu>[^/]+)/oauth
-    plugins:
-    - config:
-        body: {}
-        header: {}
-        target: http://192.168.133.143:8000/test3/aesd
-      enabled: false
-      name: js-servicecallout-refresh-decrpt
-      ordering:
-        before:
-          access:
-          - pre-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    - enabled: true
-      name: js-servicecallout-tokenresponebody
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    - config:
-        message: null
-      enabled: false
-      name: js-transform
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-    - config:
-        access: []
-        body_filter:
-        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
-        certificate: []
-        header_filter: []
-        log: []
-        rewrite: []
-        ws_client_frame: []
-        ws_close: []
-        ws_handshake: []
-        ws_upstream_frame: []
-      enabled: true
-      name: post-function
-      protocols:
-      - grpc
-      - grpcs
-      - http
-      - https
-      tags:
-      - kong.response.exit(200
-      - '"Success")'
-    - config:
-        access:
-        - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
-        body_filter: []
-        certificate: []
-        header_filter:
-        - |2+
+          local aes = require "resty.aes"
+          local str = require "resty.string"
 
+          local function aes_encrypt(data, key)
+              local aes_128_cbc_with_iv = aes:new(key, nil, aes.cipher(128, "cbc"), { iv = "1234567890123456" })
+              return str(aes_128_cbc_with_iv:encrypt(data))
+          end
+
+          return function (req)
+              local key = "0123456789abcdef"
+              local test = req.get_headers()["test"]
+              if test ~= nil then
+                  local encrypted_test = aes_encrypt(test, key)
+                  req.set_header("test", encrypted_test)
+              end
+          end
+        body_filter: []
+        certificate: []
+        header_filter: []
         log: []
         rewrite: []
         ws_client_frame: []
         ws_close: []
         ws_handshake: []
         ws_upstream_frame: []
-      enabled: true
+      enabled: false
       name: pre-function
       protocols:
       - grpc
@@ -469,37 +100,44 @@ services:
       - https
     - config:
         add:
+          body: []
           headers: []
-          json: []
           json_types: []
+          querystring: []
+        allow:
+          body: null
         append:
+          body: []
           headers: []
-          json: []
           json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
         remove:
-          headers:
-          - Content-Encoding
-          json: []
+          body: []
+          headers: []
+          querystring: []
         rename:
+          body: []
           headers: []
+          querystring: []
         replace:
+          body: []
           headers: []
-          json: []
           json_types: []
+          querystring: []
+          uri: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-recomm-masked-wtchk-dev/records
       enabled: false
-      name: response-transformer
+      name: request-transformer-advanced
       protocols:
       - grpc
       - grpcs
       - http
       - https
     - config:
-        body: {}
-        header: {}
-        method: POST
-        target: http://192.168.133.143:8000/test/aes
-      enabled: true
-      name: test
+        rules: []
+      enabled: false
+      name: route-by-header
       protocols:
       - grpc
       - grpcs
@@ -514,3 +152,70 @@ services:
     response_buffering: true
     strip_path: true
   write_timeout: 60000
+upstreams:
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: dev
+  slots: 10000
