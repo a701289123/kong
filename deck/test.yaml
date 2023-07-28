@@ -19,7 +19,7 @@ services:
   retries: 5
   routes:
   - https_redirect_status_code: 426
-    name: E2A10-0728
+    name: E2A10-0728-1
     path_handling: v0
     paths:
     - /haha
