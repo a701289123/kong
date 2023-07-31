@@ -6,7 +6,7 @@ on:
     paths-ignore:
       - '.github/**'
       - README.md 
-      - 'deck-test1/**' 
+      - 'deck/**'
 
 jobs:
   deploy_to_clouds:
