@@ -140,7 +140,7 @@ services:
     response_buffering: true
     strip_path: true
   - https_redirect_status_code: 426
-    name: E2AE2A-0730
+    name: E2AE2A-0730-test1
     path_handling: v0
     paths:
     - /123/test/abc
