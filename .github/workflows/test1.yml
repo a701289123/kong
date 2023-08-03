@@ -8,6 +8,7 @@ on:
       - README.md 
       - 'deck/**'
       - 'js/**'
+      - 'kong-conf/**'
 
 jobs:
   deploy_to_clouds:
