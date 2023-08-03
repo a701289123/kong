@@ -1,5 +1,9 @@
 name: Run deck-def
 on:
+  workflow_run:
+        workflows: ["Run js-plugins"]
+        branches: [main]
+        types: [completed]
   push:
     branches:
       - 'main'
@@ -9,10 +13,6 @@ on:
       - 'deck-test1/**' 
       - 'js/**'
       - 'kong-conf/**'
-  workflow_run:
-      workflows: ["Run js-plugins"]
-      branches: [main]
-      types: [completed]
 
 jobs:
   deploy_to_clouds:
