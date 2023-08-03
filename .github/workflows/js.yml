@@ -60,4 +60,7 @@ jobs:
 
     - name: copyfile
       run: cp -rf ./js/* /usr/local/kong/js-plugins
+
+    - name: restart kong
+      run: sudo kong restart  -c /etc/kong/kong.conf
         
