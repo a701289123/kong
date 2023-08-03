@@ -16,6 +16,7 @@ on:
 
 jobs:
   deploy_to_clouds:
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
