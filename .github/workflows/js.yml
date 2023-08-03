@@ -58,8 +58,11 @@ jobs:
     #     DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
     #     DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
-    - name: copyfile
+    - name: copyfile-js
       run: cp -rf ./js/* /usr/local/kong/js-plugins
+
+    - name: copyfile-js
+      run: cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
 
     - name: restart kong
       run: sudo kong restart  -c /etc/kong/kong.conf
