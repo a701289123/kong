@@ -1,4 +1,4 @@
-name: Run deck
+name: Run deck-test1
 on:
   push:
     branches:

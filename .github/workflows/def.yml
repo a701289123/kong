@@ -1,4 +1,4 @@
-name: Run deck
+name: Run deck-def
 on:
   push:
     branches:
@@ -9,6 +9,10 @@ on:
       - 'deck-test1/**' 
       - 'js/**'
       - 'kong-conf/**'
+  workflow_run:
+      workflows: ["Run js-plugins"]
+      branches: [main]
+      types: [completed]
 
 jobs:
   build:

@@ -1,4 +1,4 @@
-name: Run deck
+name: Run js-plugins
 on:
   push:
     branches:
