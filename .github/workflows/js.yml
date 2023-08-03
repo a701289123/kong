@@ -61,9 +61,21 @@ jobs:
     - name: copyfile-js
       run: cp -rf ./js/* /usr/local/kong/js-plugins
 
-    - name: copyfile-js
+    - name: copyfile-backup
+      run: cp -f /etc/kong/kong.conf ./kongbackup.conf 
+
+    - name: copyfile-kogconf
       run: cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
 
     - name: restart kong
       run: sudo systemctl restart kong
+
+    - name: Back kogconf
+      if: ${{ failure() }}
+      run: cp -f ./kongbackup.conf /etc/kong/kong.conf
+
+    - name: restart kong
+      if: ${{ failure() }}
+      run: sudo systemctl restart kong
+          
         
