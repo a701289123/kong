@@ -7,6 +7,7 @@ on:
       - '.github/**'
       - README.md 
       - 'deck-test1/**' 
+      - 'js/**'
 
 jobs:
   deploy_to_clouds:
