@@ -15,8 +15,6 @@ on:
       types: [completed]
 
 jobs:
-  build:
-    needs: js  
   deploy_to_clouds:
     runs-on: kong
     name: Deploying Kong Configuration
