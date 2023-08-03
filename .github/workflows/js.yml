@@ -58,8 +58,8 @@ jobs:
     #     DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
     #     DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
-  - name: copyfile
-        run: cp -r ./js /usr/local/kong/js-plugins
-        env:
-          DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
-          DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+    - name: copyfile
+          run: cp -r ./js /usr/local/kong/js-plugins
+          env:
+            DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+            DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
