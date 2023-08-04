@@ -27,7 +27,7 @@ jobs:
         should_run_all=false
         should_run_vm=false
         should_run_deck=false
-        echo "Modified files: ${{ contains(github.event.commits[0].modified, 'deck/') }}"
+        echo "Modified files: ${{ contains(github.event.commits[0].modified, 'deck/def.yaml') }}"
 
         if echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^deck/' && echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^kong-conf/' && echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^js/'; then
           should_run_all=true
