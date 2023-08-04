@@ -1,0 +1,144 @@
+name: Run cp
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'js/**'
+      - 'kong-conf/**'
+      - 'deck/**'
+
+env:
+  DEF_CHANGED: ${{ contains(github.event.commits[0].modified, 'deck/') }}
+  TEST1_CHANGED: ${{ contains(github.event.commits[0].modified, 'deck-test1/') }}
+  CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
+  JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
+
+jobs:
+  deploy-cp-js:
+    if: env.CP_CONF_CHANGED == 'true' || env.JS_CHANGED == 'true'
+    runs-on: kong
+    name: Deploying Kong cp
+    environment: play
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
+    - name: Setup Node
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: "16"
+
+    - name: copyfile-js
+      run: cp -rf ./js/* /usr/local/kong/js-plugins
+
+    - name: copyfile-backup
+      run: cp -f /etc/kong/kong.conf ./kongbackup.conf 
+
+    - name: copyfile-kogconf
+      run: cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
+
+    - name: restart kong
+      run: sudo systemctl restart kong
+
+    - name: Back kogconf
+      if: ${{ failure() }}
+      run: cp -f ./kongbackup.conf /etc/kong/kong.conf
+
+    - name: restart kong
+      if: ${{ failure() }}
+      run: sudo systemctl restart kong
+
+    - name: Trigger failure
+      if: ${{ failure() }}
+      continue-on-error: true
+      run: exit 1
+  deploy-deck:  
+    needs: deploy-def
+    if: env.DEF_CHANGED == 'true'
+    runs-on: kong
+    name: Deploying Workspace def
+    environment: play
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
+    - name: Setup Node
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: "16"
+
+    - name: Display decK Version
+      run: deck version
+
+    - name: Backup existing configuration for a specific tag
+      run: deck dump -o kong-dev.yaml --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+    - name: Validate Deck Config File
+      run: deck validate -s ./deck
+
+    - name: Compare Configurations
+      run: deck diff  -s ./deck --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+    - name: Apply new configuration
+      run: deck sync  -s ./deck --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+    - name: Back out changes on failure
+      if: ${{ failure() }}
+      run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+  deploy-deck-test1:  
+      needs: deploy-test1
+      if: env.TEST1_CHANGED == 'true'
+      runs-on: kong
+      name: Deploying Workspace def
+      environment: play
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v2.5.0
+      - name: Setup Node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: "16"
+
+      - name: Display decK Version
+        run: deck version
+
+      - name: Backup existing configuration for a specific tag
+        run: deck dump -o kong-dev.yaml --tls-skip-verify
+        env:
+          DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+          DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+      - name: Validate Deck Config File
+        run: deck validate -s ./deck-test1
+
+      - name: Compare Configurations
+        run: deck diff  -s ./deck-test1 --tls-skip-verify
+        env:
+          DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+          DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+      - name: Apply new configuration
+        run: deck sync  -s ./deck-test1 --tls-skip-verify
+        env:
+          DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+          DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+      - name: Back out changes on failure
+        if: ${{ failure() }}
+        run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+        env:
+          DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+          DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+        
