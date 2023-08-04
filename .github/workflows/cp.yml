@@ -13,13 +13,8 @@ on:
 jobs:
   check_run:
     runs-on: kong
-    outputs:
-      should_run_all: ${{ steps.check.outputs.should_run_all }}
-      should_run_vm: ${{ steps.check.outputs.should_run_vm }}
-      should_run_deck: ${{ steps.check.outputs.should_run_deck }}
     steps:
-    - id: check
-      name: Check if files in kong-conf/, js/ or deck/ were modified
+    - name: Check if files in kong-conf/, js/ or deck/ were modified
       run: |
         should_run_all=false
         should_run_vm=false
@@ -34,15 +29,15 @@ jobs:
         fi
         if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
           should_run_deck=true
-          echo "Files in deck/ were modified"
-        fi        
-        echo "::set-output name=should_run_all::$should_run_all"
-        echo "::set-output name=should_run_vm::$should_run_vm"
-        echo "::set-output name=should_run_deck::$should_run_deck"
+          echo "Files in deck/ were modified"      
+        fi  
+        echo "should_run_all=$should_run_all" >> $GITHUB_ENV
+        echo "should_run_vm=$should_run_vm" >> $GITHUB_ENV
+        echo "should_run_deck=$should_run_deck" >> $GITHUB_ENV
 
   deploy-cp-js:
     needs: check_run
-    if: needs.check_run.outputs.should_run_vm == 'true'
+    if: env.should_run_vm == 'true'
     runs-on: kong
     name: Deploying Kong cp
     environment: play
@@ -80,7 +75,7 @@ jobs:
       run: exit 1
   deploy-deck:  
     needs: [check_run, deploy-cp-js]
-    if: needs.check_run.outputs.should_run_deck == 'true'
+    if: env.should_run_deck == 'true'
     runs-on: kong
     name: Deploying Workspace def
     environment: play
@@ -125,7 +120,7 @@ jobs:
 
   deploy-deck-test1:  
       needs: [check_run, deploy-cp-js]
-      if: needs.check_run.outputs.should_run_deck == 'true'
+      if: env.should_run_deck == 'true'
       runs-on: kong
       name: Deploying Workspace def-test1
       environment: play
