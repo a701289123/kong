@@ -13,8 +13,8 @@ on:
 jobs:
   deploy-cp-js:
     if: >
-      contains(github.event.commits[0].modified, 'kong-conf/') || 
-      contains(github.event.commits[0].modified, 'js/')
+      ${{contains(github.event.commits[0].modified, 'kong-conf/') }}|| 
+      ${{contains(github.event.commits[0].modified, 'js/') }}
     runs-on: kong
     name: Deploying Kong cp
     environment: play
@@ -52,7 +52,7 @@ jobs:
       run: exit 1
   deploy-deck:  
     needs: deploy-cp-js
-    if: contains(github.event.commits[0].modified, 'deck/')
+    if: ${{contains(github.event.commits[0].modified, 'deck/')}}
     runs-on: kong
     name: Deploying Workspace def
     environment: play
@@ -97,7 +97,7 @@ jobs:
 
   deploy-deck-test1:  
       needs: deploy-cp-js
-      if: contains(github.event.commits[0].modified, 'deck-test1/')
+      if: ${{contains(github.event.commits[0].modified, 'deck-test1/') }}
       runs-on: kong
       name: Deploying Workspace def
       environment: play
