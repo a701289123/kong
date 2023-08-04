@@ -5,10 +5,10 @@ on:
       - 'main'
     paths:      
       - 'deck/**'
-env:
-  DEF_CHANGED: ${{ github.event_name == 'push' }}
-  CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
-  JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
+# env:
+#   DEF_CHANGED: ${{ github.event_name == 'push' }}
+#   CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
+#   JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
 
 jobs:
   deploy-def:
