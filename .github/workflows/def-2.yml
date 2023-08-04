@@ -27,15 +27,15 @@ jobs:
         if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
           should_run_all=true
           echo "Files in kong-conf/, js/ and deck/ were modified"
+        fi
         if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]]; then
           should_run_vm=true
           echo "Files in kong-conf/ and js/ were modified"
+        fi
         if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
           should_run_deck=true
-          echo "Files in deck/ were modified"
-        else
-          echo "No files in kong-conf/, js/ or deck/ were modified"
-        fi
+          echo "Files in deck/ were modified"      
+        fi  
         echo "::set-output name=should_run_all::$should_run_all"
         echo "::set-output name=should_run_vm::$should_run_vm"
         echo "::set-output name=should_run_deck::$should_run_deck"
