@@ -13,8 +13,13 @@ on:
 jobs:
   check_run:
     runs-on: kong
+    outputs:
+      should_run_all: ${{ steps.check.outputs.should_run_all }}
+      should_run_vm: ${{ steps.check.outputs.should_run_vm }}
+      should_run_deck: ${{ steps.check.outputs.should_run_deck }}
     steps:
-    - name: Check if files in kong-conf/, js/ or deck/ were modified
+    - id: check
+      name: Check if files in kong-conf/, js/ or deck/ were modified
       run: |
         should_run_all=false
         should_run_vm=false
@@ -31,14 +36,14 @@ jobs:
           should_run_deck=true
           echo "Files in deck/ were modified"      
         fi  
-        echo "should_run_all=$should_run_all" >> $GITHUB_ENV
-        echo "should_run_vm=$should_run_vm" >> $GITHUB_ENV
-        echo "should_run_deck=$should_run_deck" >> $GITHUB_ENV
+        echo "::set-output name=should_run_all::$should_run_all"
+        echo "::set-output name=should_run_vm::$should_run_vm"
+        echo "::set-output name=should_run_deck::$should_run_deck"
 
 
   deploy-def:
     needs: check_run
-    if: env.should_run_deck == 'true'
+    if: needs.check_run.outputs.should_run_deck == 'true'
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
