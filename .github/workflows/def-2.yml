@@ -12,35 +12,35 @@ on:
 
 jobs:
   # check_run:
-    runs-on: kong
-    outputs:
-      should_run_all: ${{ steps.check.outputs.should_run_all }}
-      should_run_vm: ${{ steps.check.outputs.should_run_vm }}
-      should_run_deck: ${{ steps.check.outputs.should_run_deck }}
-    steps:
-    - id: check
-      name: Check if files in kong-conf/, js/ or deck/ were modified
-      run: |
-        should_run_all=false
-        should_run_vm=false
-        should_run_deck=false
-        if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
-          should_run_all=true
-          echo "Files in kong-conf/, js/ and deck/ were modified"
-        fi
-        if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]]; then
-          should_run_vm=true
-          echo "Files in kong-conf/ and js/ were modified"
-        fi
-        if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
-          should_run_deck=true
-          echo "Files in deck/ were modified"      
-        fi  
-        echo "::set-output name=should_run_all::$should_run_all"
-        echo "::set-output name=should_run_vm::$should_run_vm"
-        echo "::set-output name=should_run_deck::$should_run_deck"
-    - name: Output the value of should_run_vm
-      run: echo "The value of should_run_vm is ${{ env.should_run_vm }}"
+    # runs-on: kong
+    # outputs:
+    #   should_run_all: ${{ steps.check.outputs.should_run_all }}
+    #   should_run_vm: ${{ steps.check.outputs.should_run_vm }}
+    #   should_run_deck: ${{ steps.check.outputs.should_run_deck }}
+    # steps:
+    # - id: check
+    #   name: Check if files in kong-conf/, js/ or deck/ were modified
+    #   run: |
+    #     should_run_all=false
+    #     should_run_vm=false
+    #     should_run_deck=false
+    #     if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
+    #       should_run_all=true
+    #       echo "Files in kong-conf/, js/ and deck/ were modified"
+    #     fi
+    #     if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]]; then
+    #       should_run_vm=true
+    #       echo "Files in kong-conf/ and js/ were modified"
+    #     fi
+    #     if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
+    #       should_run_deck=true
+    #       echo "Files in deck/ were modified"      
+    #     fi  
+    #     echo "::set-output name=should_run_all::$should_run_all"
+    #     echo "::set-output name=should_run_vm::$should_run_vm"
+    #     echo "::set-output name=should_run_deck::$should_run_deck"
+    # - name: Output the value of should_run_vm
+    #   run: echo "The value of should_run_vm is ${{ env.should_run_vm }}"
 
 
   deploy-def:
