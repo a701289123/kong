@@ -5,18 +5,20 @@ on:
       - 'main'
     paths:      
       - 'deck/**'
+# env:
+#   DEF_CHANGED: ${{ github.event_name == 'push' }}
+#   CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
+#   JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
 
 jobs:
   deploy-def:
-    env:
-        DEF_CHANGED: ${{ github.event_name == 'push' }}
-        CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
-        JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
+    if: contains(github.event.commits[0].modified, 'deck/') && 
+!contains(github.event.commits[0].modified, 'kong-conf/') && 
+!contains(github.event.commits[0].modified, 'js/')
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
     steps:
-      if: env.DEF_CHANGED == 'true' && env.CP_CONF_CHANGED == 'false' && env.JS_CHANGED == 'false'
     - name: Checkout
       uses: actions/checkout@v2.5.0
     - name: Setup Node
