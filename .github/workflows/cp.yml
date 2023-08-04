@@ -49,7 +49,6 @@ jobs:
       run: exit 1
   deploy-deck:  
     needs: deploy-cp-js
-    if: env.should_run_deck == 'true'
     runs-on: kong
     name: Deploying Workspace def
     environment: play
