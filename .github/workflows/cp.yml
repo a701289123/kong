@@ -99,7 +99,7 @@ jobs:
       needs: deploy-cp-js
       if: ${{contains(github.event.commits[0].modified, 'deck-test1/') }}
       runs-on: kong
-      name: Deploying Workspace def
+      name: Deploying Workspace def-test1
       environment: play
       steps:
       - name: Checkout
