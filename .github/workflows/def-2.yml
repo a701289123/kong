@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy-def:
-    if:  env.DEF_CHANGED == 'true' && env.CP_CONF_CHANGED == 'false' && env.JS_CHANGED == 'false'
+    if: contains(github.event.commits[0].modified, 'deck/') && !contains(github.event.commits[0].modified, 'kong-conf/') && !contains(github.event.commits[0].modified, 'js/')
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
