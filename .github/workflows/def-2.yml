@@ -11,7 +11,7 @@ on:
 #   JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
 
 jobs:
-  check_run:
+  # check_run:
     runs-on: kong
     outputs:
       should_run_all: ${{ steps.check.outputs.should_run_all }}
@@ -39,11 +39,13 @@ jobs:
         echo "::set-output name=should_run_all::$should_run_all"
         echo "::set-output name=should_run_vm::$should_run_vm"
         echo "::set-output name=should_run_deck::$should_run_deck"
+    - name: Output the value of should_run_vm
+      run: echo "The value of should_run_vm is ${{ env.should_run_vm }}"
 
 
   deploy-def:
-    needs: check_run
-    if: needs.check_run.outputs.should_run_deck == 'true'
+    # needs: check_run
+    # if: needs.check_run.outputs.should_run_deck == 'true'
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
