@@ -8,15 +8,17 @@ on:
       - 'kong-conf/**'
       - 'deck/**'
 
-# env:
-#   DEF_CHANGED: ${{ contains(github.event.commits[0].modified, 'deck/') }}
-#   TEST1_CHANGED: ${{ contains(github.event.commits[0].modified, 'deck-test1/') }}
-#   CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
-#   JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
+
 
 jobs:
+  env:
+    DEF_CHANGED: ${{ contains(github.event.commits[0].modified, 'deck/') }}
+    TEST1_CHANGED: ${{ contains(github.event.commits[0].modified, 'deck-test1/') }}
+    CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
+    JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
+
   deploy-cp-js:
-    if: contains(github.event.commits[0].modified, 'kong-conf/') || contains(github.event.commits[0].modified, 'js/')
+    if: env.CP_CONF_CHANGED == 'true' || env.JS_CHANGED == 'true'
     runs-on: kong
     name: Deploying Kong cp
     environment: play
@@ -54,7 +56,7 @@ jobs:
       run: exit 1
   deploy-deck:  
     needs: deploy-cp-js
-    if: contains(github.event.commits[0].modified, 'deck/')
+    if: env.DEF_CHANGED == 'true'
     runs-on: kong
     name: Deploying Workspace def
     environment: play
@@ -99,7 +101,7 @@ jobs:
 
   deploy-deck-test1:  
       needs: deploy-cp-js
-      if: contains(github.event.commits[0].modified, 'deck-test1/')
+      if: env.TEST1_CHANGED == 'true'
       runs-on: kong
       name: Deploying Workspace def
       environment: play

@@ -5,14 +5,14 @@ on:
       - 'main'
     paths:      
       - 'deck/**'
-# env:
-#   DEF_CHANGED: ${{ github.event_name == 'push' }}
-#   CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
-#   JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
 
 jobs:
+  env:
+    DEF_CHANGED: ${{ github.event_name == 'push' }}
+    CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
+    JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
   deploy-def:
-    if: contains(github.event.commits[0].modified, 'deck/') && !contains(github.event.commits[0].modified, 'kong-conf/') && !contains(github.event.commits[0].modified, 'js/')
+    if: env.DEF_CHANGED == 'true' && env.CP_CONF_CHANGED == 'false' && env.JS_CHANGED == 'false'
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
