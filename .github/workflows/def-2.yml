@@ -12,9 +12,9 @@ on:
 
 jobs:
   deploy-def:
-    if: 
-      !${{ contains(github.event.commits[0].modified, 'kong-conf/') }} && 
-      !${{ contains(github.event.commits[0].modified, 'js/') }}
+    if: >
+      "!contains(github.event.commits[0].modified, 'kong-conf/')" && 
+      "!contains(github.event.commits[0].modified, 'js/')"
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
