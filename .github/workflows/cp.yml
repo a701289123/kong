@@ -24,13 +24,18 @@ jobs:
         node-version: "16"
 
     - name: copyfile-js
-      run: cp -rf ./js/* /usr/local/kong/js-plugins
+      run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
 
     - name: copyfile-backup
-      run: cp -f /etc/kong/kong.conf ./kongbackup.conf 
+      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf 
 
     - name: copyfile-kogconf
-      run: cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
+      run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
+
+    - name: Run npm install in 
+      run: |
+        cd /usr/local/kong/js-plugins
+        npm install
 
     - name: restart kong
       run: sudo systemctl restart kong
