@@ -8,6 +8,7 @@ class ServicecalloutPlugin {
     }
 
     async access(kong) {
+        console.log("123")
         let target
         let header        
         let path = await kong.request.getPath()
