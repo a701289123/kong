@@ -16,28 +16,28 @@ jobs:
     steps:
     - name: Check if files in kong-conf/, js/ or deck/ were modified
       run: |
-        should_run-all=false
-        should_run-vm=false
-        should_run-deck=false
+        should_run_all=false
+        should_run_vm=false
+        should_run_deck=false
         if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "def/" ]]; then
-          should_run-all=true
+          should_run_all=true
           echo "Files in kong-conf/, js/ and deck/ were modified"
         elif [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]]; then
-          should_run-vm=true
+          should_run_vm=true
           echo "Files in kong-conf/ and js/ were modified"
         elif [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
-          should_run-deck=true
+          should_run_deck=true
           echo "Files in deck/ were modified"
         else
           echo "No files in kong-conf/, js/ or deck/ were modified"
         fi
-        echo "should_run-all=$should_run-all" >> $GITHUB_ENV
-        echo "should_run-vm=$should_run-vm" >> $GITHUB_ENV
-        echo "should_run-deck=$should_run-deck" >> $GITHUB_ENV
+        echo "should_run_all=$should_run_all" >> $GITHUB_ENV
+        echo "should_run_vm=$should_run_vm" >> $GITHUB_ENV
+        echo "should_run_deck=$should_run_deck" >> $GITHUB_ENV
 
   deploy-def:
     needs: check_run
-    if: env.should_run-deck == 'true'
+    if: env.should_run_deck == 'true'
     runs-on: kong
     name: Deploying Kong Configuration
     environment: play
