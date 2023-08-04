@@ -27,10 +27,10 @@ jobs:
         if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
           should_run_all=true
           echo "Files in kong-conf/, js/ and deck/ were modified"
-        elif [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]]; then
+        if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "kong-conf/" ]] && [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "js/" ]]; then
           should_run_vm=true
           echo "Files in kong-conf/ and js/ were modified"
-        elif [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
+        if [[ "${{ join(github.event.commits[0].modified, ' ') }}" =~ "deck/" ]]; then
           should_run_deck=true
           echo "Files in deck/ were modified"
         else
