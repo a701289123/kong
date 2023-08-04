@@ -29,7 +29,7 @@ jobs:
         should_run_deck=false
         echo "Modified files: ${{ join(github.event.commits.*.modified, ', ') }}"
 
-        if echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^def/' && echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^kong-conf/' && echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^js/'; then
+        if echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^deck/' && echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^kong-conf/' && echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^js/'; then
           should_run_all=true
           echo "Files in kong-conf/, js/ and deck/ were modified"
         fi
@@ -37,7 +37,7 @@ jobs:
           should_run_vm=true
           echo "Files in kong-conf/ and js/ were modified"
         fi
-        if echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^def/'; then
+        if echo "${{ join(github.event.commits.*.modified, '\n') }}" | grep -qE '^deck/'; then
           should_run_deck=true
           echo "Files in deck/ were modified"      
         fi  
