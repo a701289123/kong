@@ -12,7 +12,7 @@ on:
 
 jobs:
   check_run:
-      runs-on: kong
+    runs-on: kong
     steps:
     - name: Check if files in kong-conf/, js/ or deck/ were modified
       run: |
