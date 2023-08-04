@@ -1,7 +1,7 @@
 'use strict';
 
 const axios = require('axios');
-console.log("1234")
+console.log("123456")
 
 class ServicecalloutPlugin {
     constructor(config) {
