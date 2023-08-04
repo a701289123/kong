@@ -5,6 +5,9 @@ on:
       - 'main'
     paths:      
       - 'deck/**'
+    paths-ignore:
+      - 'js/**'
+      - 'kong-conf/**'
 # env:
 #   DEF_CHANGED: ${{ github.event_name == 'push' }}
 #   CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
