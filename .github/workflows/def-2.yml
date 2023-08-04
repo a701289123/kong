@@ -1,0 +1,56 @@
+name: Run deck-def
+on:
+  push:
+    branches:
+      - 'main'
+    paths:      
+      - 'deck/**'
+env:
+  DEF_CHANGED: ${{ github.event_name == 'push' }}
+  CP_CONF_CHANGED: ${{ contains(github.event.commits[0].modified, 'kong-conf/') }}
+  JS_CHANGED: ${{ contains(github.event.commits[0].modified, 'js/') }}
+
+jobs:
+  deploy-def:
+    if:  env.DEF_CHANGED == 'true' && env.CP_CONF_CHANGED == 'false' && env.JS_CHANGED == 'false'
+    runs-on: kong
+    name: Deploying Kong Configuration
+    environment: play
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
+    - name: Setup Node
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: "16"
+
+    - name: Display decK Version
+      run: deck version
+
+    - name: Backup existing configuration for a specific tag
+      run: deck dump -o kong-dev.yaml --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+    - name: Validate Deck Config File
+      run: deck validate -s ./deck
+
+    - name: Compare Configurations
+      run: deck diff  -s ./deck --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+    - name: Apply new configuration
+      run: deck sync  -s ./deck --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
+    - name: Back out changes on failure
+      if: ${{ failure() }}
+      run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+      env:
+        DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+        DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
