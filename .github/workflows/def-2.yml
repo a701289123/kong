@@ -15,7 +15,7 @@ on:
 
 jobs:
   check_run:
-    runs-on: kong
+    runs-on: ubuntu-latest
     outputs:
       should_run_all: ${{ steps.check.outputs.should_run_all }}
       should_run_vm: ${{ steps.check.outputs.should_run_vm }}
