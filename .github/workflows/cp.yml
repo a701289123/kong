@@ -20,7 +20,7 @@ jobs:
       run: |
         AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
         echo "Available space: $AVAILABLE_SPACE"
-        if [ $AVAILABLE_SPACE -lt 4271040 ]; then
+        if [ $AVAILABLE_SPACE -lt 1048576 ]; then
           echo "Error: Less than 1GB of disk space available"
           exit 1
         fi
