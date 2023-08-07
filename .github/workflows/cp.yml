@@ -11,7 +11,7 @@ on:
 
 
 jobs:
-  Check disk space:
+  Check-disk-space:
     runs-on: kong
     name: Check disk space
     environment: play
@@ -26,7 +26,7 @@ jobs:
         fi
 
   deploy-cp-js:
-    needs: Check disk space
+    needs: Check-disk-space
     runs-on: kong
     name: Deploying Kong cp
     environment: play
