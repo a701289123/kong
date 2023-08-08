@@ -17,6 +17,6 @@ jobs:
         run: |
           git config --global user.name 'jerry-lee@GLSoft'
           git config --global user.email 'jerry-lee@webglsoft.com'
-          git checkout dev -- .github/workflows/cp.yml
+          git checkout cicd-test-prod -- .github/workflows/cp.yml
           git commit -m "Update cp.yml"
           git push
