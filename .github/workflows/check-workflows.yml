@@ -14,8 +14,9 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - name: Run if cp.yml has changed
+      - name: user
         uses: fregante/setup-git-user@v2
+      - name: Run if cp.yml has changed
         run: |
           echo "List of branches:"
           git branch -a
