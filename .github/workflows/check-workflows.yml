@@ -14,6 +14,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          token: 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
       - name: Run if cp.yml has changed
         run: |
           echo "List of branches:"
@@ -22,4 +23,4 @@ jobs:
           git config --global user.name jerry-lee@GLSoft
           git checkout remotes/origin/cicd-test-prod -- .github/workflows/cp.yml
           git commit -m "Update cp.yml"
-          git push
+          git push https://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@github.com/a701289123/kong.git
