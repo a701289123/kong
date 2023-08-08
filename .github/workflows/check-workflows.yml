@@ -22,5 +22,3 @@ jobs:
           git checkout remotes/origin/cicd-test-prod -- .github/workflows/cp.yml
           git commit -m "Update cp.yml"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
