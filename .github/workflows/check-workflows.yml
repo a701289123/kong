@@ -1,0 +1,22 @@
+name: Check for changes in cp.yml and push to main
+on:
+  push:
+    # branches:
+    #   - dev
+    paths:
+      - '.github/workflows/cp.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Run if cp.yml has changed
+        run: |
+          git config --global user.name 'jerry-lee@GLSoft'
+          git config --global user.email 'jerry-lee@webglsoft.com'
+          git checkout cicd-test-prod -- .github/workflows/cp.yml
+          git commit -m "Update cp.yml"
+          git push
