@@ -14,12 +14,13 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run if cp.yml has changed
         run: |
-          git config --global user.name 'jerry-lee@GLSoft'
-          git config --global user.email 'jerry-lee@webglsoft.com'
           echo "List of branches:"
           git branch -a
           git checkout remotes/origin/cicd-test-prod -- .github/workflows/cp.yml
           git commit -m "Update cp.yml"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
