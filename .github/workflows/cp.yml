@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  Check-disk-space-1:
+  Check-disk-space-2:
     runs-on: kong
     name: Check disk space
     environment: play
