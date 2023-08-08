@@ -21,3 +21,4 @@ jobs:
           author_email: jerry-lee@webglsoft.com
           message: Update cp.yml
           add: '.github/workflows/cp.yml'
+          force: true
