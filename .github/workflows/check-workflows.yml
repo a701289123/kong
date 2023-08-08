@@ -18,8 +18,6 @@ jobs:
         run: |
           echo "List of branches:"
           git branch -a
-          git config --global user.email jerry-lee@webglsoft.com
-          git config --global user.name a701289123
           git checkout remotes/origin/cicd-test-prod -- .github/workflows/cp.yml
           git commit -m "Update cp.yml"
           git push
