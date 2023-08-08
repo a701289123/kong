@@ -15,10 +15,9 @@ jobs:
           ref: main
           fetch-depth: 0
       - name: Run if cp.yml has changed
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: jerry-lee@GLSoft
-          author_email: jerry-lee@webglsoft.com
-          message: Update cp.yml
-          add: '.github/workflows/cp.yml'
-          force: true
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'youremail@example.com'
+          git checkout main -- .github/workflows/cp.yml
+          git commit -m "Update cp.yml"
+          git push
