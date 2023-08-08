@@ -18,6 +18,8 @@ jobs:
         run: |
           git config --global user.name 'Your Name'
           git config --global user.email 'youremail@example.com'
+          echo "List of branches:"
+          git branch -a
           git checkout kong-dev -- .github/workflows/cp.yml
           git commit -m "Update cp.yml"
           git push
