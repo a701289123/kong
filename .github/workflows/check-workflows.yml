@@ -14,9 +14,27 @@ jobs:
         with:
           ref: main
       - name: Run if cp.yml has changed
-        run: |
-          git config --global user.name 'jerry-lee@GLSoft'
-          git config --global user.email 'jerry-lee@webglsoft.com'
-          git checkout cicd-test-prod -- .github/workflows/cp.yml
-          git commit -m "Update cp.yml"
-          git push
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const branch = 'main';
+            const path = '.github/workflows/cp.yml';
+            const message = 'Update cp.yml';
+            const content = await github.repos.getContent({
+              owner,
+              repo,
+              path,
+              ref: 'dev'
+            });
+            const sha = content.data.sha;
+            const encodedContent = content.data.content;
+            await github.repos.createOrUpdateFileContents({
+              owner,
+              repo,
+              path,
+              branch,
+              message,
+              content: encodedContent,
+              sha
+            });
