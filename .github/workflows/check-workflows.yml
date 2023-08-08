@@ -15,9 +15,9 @@ jobs:
           ref: main
           fetch-depth: 0
       - name: Run if cp.yml has changed
-        run: |
-          git config --global user.name 'jerry-lee@GLSoft'
-          git config --global user.email 'jerry-lee@webglsoft.com'
-          git checkout cicd-test-prod -- .github/workflows/cp.yml
-          git commit -m "Update cp.yml"
-          git push
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: jerry-lee@GLSoft
+          author_email: jerry-lee@webglsoft.com
+          message: Update cp.yml
+          add: '.github/workflows/cp.yml'
