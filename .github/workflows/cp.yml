@@ -1,13 +1,13 @@
-name: Run Deploying
+name: Run Deploying vm
 on:
-  push:
-    branches:
-      - 'main'
-    paths:
-      - 'js/**'
-      - 'kong-conf/**'
-      - 'deck/**'
-      - 'deck-test1/**'
+  # push:
+  #   branches:
+  #     - 'main'
+  #   paths:
+  #     - 'js/**'
+  #     - 'kong-conf/**'
+  #     - 'deck/**'
+  #     - 'deck-test1/**'
   workflow_dispatch:
 
 
