@@ -8,6 +8,7 @@ on:
       - 'kong-conf/**'
       - 'deck/**'
       - 'deck-test1/**'
+  workflow_dispatch:
 
 
 jobs:
