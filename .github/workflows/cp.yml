@@ -1,4 +1,4 @@
-name: Run Deploying vm
+name: Run Deploying vm123456789
 on:
   # push:
   #   branches:
@@ -12,7 +12,7 @@ on:
 
 
 jobs:
-  Check-disk-space:
+  Check-disk-space-2:
     runs-on: kong
     name: Check disk space
     environment: play
