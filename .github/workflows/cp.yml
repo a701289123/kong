@@ -41,7 +41,10 @@ jobs:
       run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
 
     - name: copyfile-backup
-      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf 
+      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
+
+    - name: check conf
+      run: sudo kong check ./kong-conf/kong.conf 
 
     - name: copyfile-kogconf
       run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
