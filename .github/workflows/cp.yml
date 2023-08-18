@@ -44,13 +44,13 @@ jobs:
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
 
     - name: check conf
-      id: check_conf
+      id: checkconf
       run: |
         sudo kong check ./kong-conf/kong.conf 
-        echo "check_conf_outcome=${{ steps.check_conf.outcome }}" 
+        echo "check_conf_outcome=${{ steps.checkconf.outcome }}" 
 
     - name: check conf failed
-      if: ${{ steps.check_conf.outcome == 'failure' }}
+      if: ${{ steps.checkconf.outcome == 'failure' }}
       run: exit 1
 
     - name: copyfile-kogconf
