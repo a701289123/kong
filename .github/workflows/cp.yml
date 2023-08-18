@@ -45,16 +45,15 @@ jobs:
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
 
     - name: check conf
-      id: checkconf
+      id: check_conf
       continue-on-error: true
       run: |
-        sudo kong check ./kong-conf/kong.conf 
-        echo "check_conf_outcome=${{ steps.checkconf.conclusion }}"
+        sudo kong check ./kong-conf/kong.conf
 
     - name: check conf failed
-      if: ${{ steps.checkconf.outcome == 'failure' }}
+      if: ${{ steps.check_conf.outcome == 'failure' }}
       run: |
-        echo "check_conf_outcome=${{ steps.checkconf.outcome }}"
+        echo "check_conf_outcome=${{ steps.check_conf.outcome }}"
         exit 1
 
     - name: copyfile-kogconf
@@ -67,6 +66,7 @@ jobs:
 
     - name: restart kong
       id: restart_kong
+      continue-on-error: true
       run: sudo systemctl restart kong
 
     - name: Back kogconf
