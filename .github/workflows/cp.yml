@@ -46,6 +46,10 @@ jobs:
     - name: check conf
       run: sudo kong check ./kong-conf/kong.conf 
 
+    - name: check conf failed
+      if: ${{ failure() }}
+      run: exit 1
+
     - name: copyfile-kogconf
       run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
 
