@@ -44,10 +44,11 @@ jobs:
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
 
     - name: check conf
+      id: check_conf
       run: sudo kong check ./kong-conf/kong.conf 
 
     - name: check conf failed
-      if: ${{ failure() }}
+      if: ${{ steps.check_conf.outcome == 'failure' }}
       run: exit 1
 
     - name: copyfile-kogconf
@@ -59,20 +60,17 @@ jobs:
         npm install
 
     - name: restart kong
+      id: restart_kong
       run: sudo systemctl restart kong
 
     - name: Back kogconf
-      if: ${{ failure() }}
+      if: ${{ steps.restart_kong.outcome == 'failure' }}
       run: cp -f ./kongbackup.conf /etc/kong/kong.conf
 
     - name: restart kong
-      if: ${{ failure() }}
+      if: ${{ steps.restart_kong.outcome == 'failure' }}
       run: sudo systemctl restart kong
-
-    - name: Trigger failure
-      if: ${{ failure() }}
-      continue-on-error: true
-      run: exit 1
+    
   deploy-deck:  
     needs: deploy-cp-js
     runs-on: kong
