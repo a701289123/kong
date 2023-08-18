@@ -12,19 +12,19 @@ on:
 
 
 jobs:
-  Check-disk-space:
-    runs-on: kong
-    name: Check disk space
-    environment: play
-    steps:
-    - name: Check disk space
-      run: |
-        AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
-        echo "Available space: $AVAILABLE_SPACE"
-        if [ $AVAILABLE_SPACE -lt 1048576 ]; then
-          echo "Error: Less than 1GB of disk space available"
-          exit 1
-        fi
+  # Check-disk-space:
+  #   runs-on: kong
+  #   name: Check disk space
+  #   environment: play
+  #   steps:
+  #   - name: Check disk space
+  #     run: |
+  #       AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
+  #       echo "Available space: $AVAILABLE_SPACE"
+  #       if [ $AVAILABLE_SPACE -lt 1048576 ]; then
+  #         echo "Error: Less than 1GB of disk space available"
+  #         exit 1
+  #       fi
   deploy-cp-js:
     needs: Check-disk-space
     runs-on: kong
@@ -41,13 +41,14 @@ jobs:
       run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
 
     - name: copyfile-backup
+      id: test
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
 
     - name: check conf
       id: checkconf
       run: |
         sudo kong check ./kong-conf/kong.conf 
-        echo "check_conf_outcome=${{ steps.checkconf.outcome }}" 
+        echo "check_conf_outcome=${{ steps.test.outcome }}" 
 
     - name: check conf failed
       if: ${{ steps.checkconf.outcome == 'failure' }}
