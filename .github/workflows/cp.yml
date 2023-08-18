@@ -1,4 +1,4 @@
-name: Run Deploying vm123456789
+name: Run Deploying vm
 on:
   # push:
   #   branches:
