@@ -79,7 +79,6 @@ jobs:
     
     - name: Trigger failure
       if: ${{ steps.restart_kong.outcome == 'failure' }}
-      continue-on-error: true
       run: exit 1
 
   deploy-deck:  
