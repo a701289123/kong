@@ -77,6 +77,11 @@ jobs:
       if: ${{ steps.restart_kong.outcome == 'failure' }}
       run: sudo systemctl restart kong
     
+    - name: Trigger failure
+      if: {{ steps.restart_kong.outcome == 'failure' }}
+      continue-on-error: true
+      run: exit 1
+
   deploy-deck:  
     needs: deploy-cp-js
     runs-on: kong
