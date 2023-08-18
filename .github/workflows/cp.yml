@@ -78,7 +78,7 @@ jobs:
       run: sudo systemctl restart kong
     
     - name: Trigger failure
-      if: {{ steps.restart_kong.outcome == 'failure' }}
+      if: ${{ steps.restart_kong.outcome == 'failure' }}
       continue-on-error: true
       run: exit 1
 
