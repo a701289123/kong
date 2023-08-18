@@ -45,7 +45,9 @@ jobs:
 
     - name: check conf
       id: check_conf
-      run: sudo kong check ./kong-conf/kong.conf 
+      run: |
+        sudo kong check ./kong-conf/kong.conf 
+        echo "check_conf_outcome=${{ steps.check_conf.outcome }}" 
 
     - name: check conf failed
       if: ${{ steps.check_conf.outcome == 'failure' }}
