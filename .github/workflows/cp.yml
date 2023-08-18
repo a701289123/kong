@@ -53,7 +53,9 @@ jobs:
 
     - name: check conf failed
       if: ${{ steps.checkconf.outcome == 'failure' }}
-      run: exit 1
+      run: |
+        echo "check_conf_outcome=${{ steps.checkconf.outcome }}"
+        exit 1
 
     - name: copyfile-kogconf
       run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
