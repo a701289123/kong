@@ -1,13 +1,5 @@
 name: Run Deploying vm
 on:
-  push:
-    branches:
-      - 'main'
-  #   paths:
-  #     - 'js/**'
-  #     - 'kong-conf/**'
-  #     - 'deck/**'
-  #     - 'deck-test1/**'
   workflow_dispatch:
 
 
@@ -36,6 +28,8 @@ jobs:
     name: Deploying Kong cp js
     environment: play
     steps:
+    - name: backup-js
+      run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/ 
     - name: copyfile-js
       run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
     - name: Run npm install in 
@@ -48,8 +42,6 @@ jobs:
     name: Deploying Kong cp
     environment: play
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.5.0
     - name: Setup Node
       uses: actions/setup-node@v3.5.1
       with:
@@ -65,7 +57,11 @@ jobs:
 
     - name: Back kogconf
       if: ${{ failure() }}
-      run: cp -f ./kongbackup.conf /etc/kong/kong.conf
+      run: sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
+
+    - name: Back plugins
+      if: ${{ failure() }}
+      run: sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
 
     - name: restart kong
       if: ${{ failure() }}
@@ -81,8 +77,6 @@ jobs:
     name: Deploying Workspace def
     environment: play
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.5.0
     - name: Setup Node
       uses: actions/setup-node@v3.5.1
       with:
@@ -125,8 +119,6 @@ jobs:
       name: Deploying Workspace def-test1
       environment: play
       steps:
-      - name: Checkout
-        uses: actions/checkout@v2.5.0
       - name: Setup Node
         uses: actions/setup-node@v3.5.1
         with:
