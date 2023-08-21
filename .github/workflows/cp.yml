@@ -44,10 +44,10 @@ jobs:
     name: Deploying Kong cp
     environment: play
     steps:
-    - name: Setup Node
-      uses: actions/setup-node@v3.5.1
-      with:
-        node-version: "16"
+    # - name: Setup Node
+    #   uses: actions/setup-node@v3.5.1
+    #   with:
+    #     node-version: "16"
     - name: copyfile-backup
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf    
 
@@ -121,10 +121,10 @@ jobs:
       name: Deploying Workspace def-test1
       environment: play
       steps:
-      - name: Setup Node
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: "16"
+      # - name: Setup Node
+      #   uses: actions/setup-node@v3.5.1
+      #   with:
+      #     node-version: "16"
 
       - name: Display decK Version
         run: deck version
