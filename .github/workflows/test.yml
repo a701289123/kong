@@ -21,6 +21,9 @@ jobs:
           fi
       - name: check conf
         run: sudo kong check ./Develop/setting/uat/cp/kong.conf
+      - name: Delete checked-out files
+        if: ${{ failure() }}
+        run: sudo rm -rf *
 
   # check-dp-disk-space-conf:
   #   needs: check-cp-disk-space-conf
