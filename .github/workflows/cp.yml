@@ -12,21 +12,38 @@ on:
 
 
 jobs:
-  # Check-disk-space:
-  #   runs-on: kong
-  #   name: Check disk space
-  #   environment: play
-  #   steps:
-  #   - name: Check disk space
-  #     run: |
-  #       AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
-  #       echo "Available space: $AVAILABLE_SPACE"
-  #       if [ $AVAILABLE_SPACE -lt 1048576 ]; then
-  #         echo "Error: Less than 1GB of disk space available"
-  #         exit 1
-  #       fi
+  Check-disk-space:
+    runs-on: kong
+    name: Check disk space
+    environment: play
+    steps:
+    - name: Check disk space
+      run: |
+        AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
+        echo "Available space: $AVAILABLE_SPACE"
+        if [ $AVAILABLE_SPACE -lt 1048576 ]; then
+          echo "Error: Less than 1GB of disk space available"
+          exit 1
+        fi
+    - name: check conf
+      id: check_conf
+      continue-on-error: true
+      run: |
+        sudo kong check ./kong-conf/kong.conf
   deploy-cp-js:
-    # needs: Check-disk-space
+    needs: Check-disk-space
+    runs-on: kong
+    name: Deploying Kong cp js
+    environment: play
+    steps:
+    - name: copyfile-js
+      run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
+    - name: Run npm install in 
+      run: |
+        cd /usr/local/kong/js-plugins
+        npm install
+  deploy-cp-conf:
+    needs: deploy-cp-js
     runs-on: kong
     name: Deploying Kong cp
     environment: play
@@ -37,48 +54,25 @@ jobs:
       uses: actions/setup-node@v3.5.1
       with:
         node-version: "16"
-    - name: copyfile-js
-      run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
-
     - name: copyfile-backup
-      id: test
-      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
-
-    - name: check conf
-      id: check_conf
-      continue-on-error: true
-      run: |
-        sudo kong check ./kong-conf/kong.conf
-
-    - name: check conf failed
-      if: ${{ steps.check_conf.outcome == 'failure' }}
-      run: |
-        echo "check_conf_outcome=${{ steps.check_conf.outcome }}"
-        exit 1
+      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf    
 
     - name: copyfile-kogconf
       run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
 
-    - name: Run npm install in 
-      run: |
-        cd /usr/local/kong/js-plugins
-        npm install
-
     - name: restart kong
-      id: restart_kong
-      continue-on-error: true
       run: sudo systemctl restart kong
 
     - name: Back kogconf
-      if: ${{ steps.restart_kong.outcome == 'failure' }}
+      if: ${{ failure() }}
       run: cp -f ./kongbackup.conf /etc/kong/kong.conf
 
     - name: restart kong
-      if: ${{ steps.restart_kong.outcome == 'failure' }}
+      if: ${{ failure() }}
       run: sudo systemctl restart kong
     
     - name: Trigger failure
-      if: ${{ steps.restart_kong.outcome == 'failure' }}
+      if: ${{ failure() }}
       run: exit 1
 
   deploy-deck:  
