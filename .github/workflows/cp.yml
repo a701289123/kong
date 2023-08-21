@@ -76,7 +76,7 @@ jobs:
       run: exit 1
 
   deploy-deck:  
-    needs: deploy-cp-js
+    needs: deploy-cp-conf
     runs-on: kong
     name: Deploying Workspace def
     environment: play
