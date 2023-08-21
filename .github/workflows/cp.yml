@@ -31,7 +31,9 @@ jobs:
     - name: Create backup directory
       run: sudo mkdir -p ./backup-js/
     - name: backup-js
-      run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/ 
+      run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/
+    - name: Change permissions
+      run: sudo chmod -R 777 ./backup-js/
     - name: copyfile-js
       run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
     - name: Run npm install in 
