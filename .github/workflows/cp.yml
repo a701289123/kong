@@ -120,7 +120,7 @@ jobs:
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
   deploy-deck-test1:  
-      needs: deploy-cp-js
+      needs: deploy-cp-conf
       runs-on: kong
       name: Deploying Workspace def-test1
       environment: play
