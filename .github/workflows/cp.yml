@@ -160,6 +160,9 @@ jobs:
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
   clear:
       needs: [deploy-deck-test1,deploy-deck]
+      runs-on: kong
+      name: clear flows
+      environment: play
       steps:
       - name: Delete checked-out files
         run: rm -rf *
