@@ -79,16 +79,16 @@ jobs:
     name: Deploying Workspace def
     environment: play
     steps:
-    - name: Setup Node
-      uses: actions/setup-node@v3.5.1
-      with:
-        node-version: "16"
+    # - name: Setup Node
+    #   uses: actions/setup-node@v3.5.1
+    #   with:
+    #     node-version: "16"
 
     - name: Display decK Version
       run: deck version
 
     - name: Backup existing configuration for a specific tag
-      run: deck dump -o kong-dev.yaml --tls-skip-verify
+      run: deck dump -o kong-dev-deck.yaml --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -110,7 +110,7 @@ jobs:
 
     - name: Back out changes on failure
       if: ${{ failure() }}
-      run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+      run: deck sync  -s kong-dev-deck.yaml  --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -130,7 +130,7 @@ jobs:
         run: deck version
 
       - name: Backup existing configuration for a specific tag
-        run: deck dump -o kong-dev.yaml --tls-skip-verify
+        run: deck dump -o kong-dev-deck-test.yaml --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -152,7 +152,7 @@ jobs:
 
       - name: Back out changes on failure
         if: ${{ failure() }}
-        run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+        run: deck sync  -s kong-dev-deck-test.yaml  --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
