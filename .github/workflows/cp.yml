@@ -28,6 +28,8 @@ jobs:
     name: Deploying Kong cp js
     environment: play
     steps:
+    - name: Create backup directory
+      run: mkdir -p ./backup-js/
     - name: backup-js
       run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/ 
     - name: copyfile-js
