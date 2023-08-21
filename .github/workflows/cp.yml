@@ -165,6 +165,6 @@ jobs:
       environment: play
       steps:
       - name: Delete checked-out files
-        run: rm -rf *
+        run: sudo rm -rf *
 
         
