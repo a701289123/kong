@@ -27,9 +27,7 @@ jobs:
         fi
     - name: check conf
       id: check_conf
-      continue-on-error: true
-      run: |
-        sudo kong check ./kong-conf/kong.conf
+      run: sudo kong check ./kong-conf/kong.conf
   deploy-cp-js:
     needs: Check-disk-space
     runs-on: kong
