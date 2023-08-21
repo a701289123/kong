@@ -158,4 +158,10 @@ jobs:
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+  clear:
+      needs: [deploy-deck-test1,deploy-deck]
+      steps:
+      - name: Delete checked-out files
+        run: rm -rf *
+
         
