@@ -59,7 +59,8 @@ jobs:
       run: sudo mkdir -p ./backup-js/
 
     - name: backup-js
-      run: sudo find /usr/local/kong/js-plugins/ -name "*.js" -exec cp -t ./backup-js/ {} +
+      run: sudo find /usr/local/kong/js-plugins/ -path /usr/local/kong/js-plugins/node_modules -prune -o -name "*.js" -exec cp -t ./backup-js/ {} +
+
 
     - name: Change permissions
       run: sudo chmod -R 777 ./backup-js/
