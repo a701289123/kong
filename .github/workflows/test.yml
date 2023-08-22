@@ -39,7 +39,7 @@ jobs:
           exit 1
         fi
     - name: check conf
-        run: sudo kong check ./Develop/setting/uat/dp/kong.conf
+      run: sudo kong check ./Develop/setting/uat/dp/kong.conf
 
   deploy-cp:
     needs: check-cp-disk-space-conf
