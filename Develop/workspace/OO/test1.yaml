@@ -1,4 +1,4 @@
-_format_version: "1.1"
+_format_version: "3.0"
 _workspace: test1
 services:
 - connect_timeout: 60000
