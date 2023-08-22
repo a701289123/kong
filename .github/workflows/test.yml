@@ -22,24 +22,24 @@ jobs:
       - name: check conf
         run: sudo kong check ./Develop/setting/uat/cp/kong.conf
 
-  # check-dp-disk-space-conf:
-  #   needs: check-cp-disk-space-conf
-  #   runs-on: kong-dp
-  #   name: Check dp disk space
-  #   environment: play
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2.5.0
-  #   - name: Check disk space
-  #     run: |
-  #       AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
-  #       echo "Available space: $AVAILABLE_SPACE"
-  #       if [ $AVAILABLE_SPACE -lt 1048576 ]; then
-  #         echo "Error: Less than 1GB of disk space available"
-  #         exit 1
-  #       fi
-  #   - name: check conf
-  #       run: sudo kong check ./Develop/setting/uat/dp/kong.conf
+  check-dp-disk-space-conf:
+    needs: check-cp-disk-space-conf
+    runs-on: kong-dp
+    name: Check dp disk space
+    environment: play
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
+    - name: Check disk space
+      run: |
+        AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
+        echo "Available space: $AVAILABLE_SPACE"
+        if [ $AVAILABLE_SPACE -lt 1048576 ]; then
+          echo "Error: Less than 1GB of disk space available"
+          exit 1
+        fi
+    - name: check conf
+        run: sudo kong check ./Develop/setting/uat/dp/kong.conf
 
   deploy-cp:
     needs: check-cp-disk-space-conf
@@ -101,69 +101,80 @@ jobs:
       if: ${{ failure() }}
       run: exit 1
 
-  # deploy-dp:
-  #   needs: deploy-cp
-  #   runs-on: kong-dp
-  #   name: Deploying Kong dp
-  #   environment: play
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2.5.0
-  #   - name: Setup Node
-  #     uses: actions/setup-node@v3.5.1
-  #     with:
-  #       node-version: "16"
+  deploy-dp:
+    needs: deploy-cp
+    runs-on: kong-dp
+    name: Deploying Kong dp
+    environment: play
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
+    - name: Setup Node
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: "16"
 
-  #   - name: Create backup directory
-  #     run: sudo mkdir -p ./backup-js/
+    # - name: Create backup directory
+    #   run: sudo mkdir -p ./backup-js/
 
-  #   - name: backup-js
-  #     run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/
+    # - name: backup-js
+    #   run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/
 
-  #   - name: Change permissions
-  #     run: sudo chmod -R 777 ./backup-js/
+    # - name: Change permissions
+    #   run: sudo chmod -R 777 ./backup-js/
 
-  #   - name: copyfile-js
-  #     run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/
+    - name: copyfile-js
+      run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/
 
-  #   - name: Run npm install in 
-  #     run: |
-  #       cd /usr/local/kong/js-plugins
-  #       sudo npm install
+    - name: Run npm install in 
+      run: |
+        cd /usr/local/kong/js-plugins
+        sudo npm install
 
-  #   - name: backup-conf
-  #     run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
+    - name: backup-conf
+      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
 
-  #   - name: copyfile-kogconf
-  #     run: sudo cp -f ./Develop/setting/uat/dp/kong.conf /etc/kong/kong.conf    
+    - name: copyfile-kogconf
+      run: sudo cp -f ./Develop/setting/uat/dp/kong.conf /etc/kong/kong.conf    
 
-  #   - name: restart kong
-  #     run: sudo systemctl restart kong
+    - name: restart kong
+      run: sudo systemctl restart kong
 
-  #   - name: Delete checked-out files
-  #     run: sudo rm -rf *
+    - name: Delete checked-out files
+      run: sudo rm -rf *
 
-  #   - name: Back kogconf
-  #     if: ${{ failure() }}
-  #     run: sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
+    - name: Back kogconf
+      if: ${{ failure() }}
+      run: sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
 
-  #   - name: Back plugins
-  #     if: ${{ failure() }}
-  #     run: sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
+    - name: Back plugins
+      if: ${{ failure() }}
+      run: sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
 
-  #   - name: restart kong
-  #     if: ${{ failure() }}
-  #     run: sudo systemctl restart kong
+    - name: restart kong
+      if: ${{ failure() }}
+      run: sudo systemctl restart kong
 
-  #   - name: Delete checked-out files
-  #     if: ${{ failure() }}
-  #     run: sudo rm -rf *
+    # - name: Delete checked-out files
+    #   if: ${{ failure() }}
+    #   run: sudo rm -rf *
 
-  #   - name: Trigger failure
-  #     if: ${{ failure() }}
-  #     run: exit 1
+    - name: Trigger failure
+      if: ${{ failure() }}
+      run: exit 1
 
-  
+  back-cp:
+    needs: deploy-dp
+    runs-on: kong
+    name: back job
+    if: always()
+    steps:
+    - name: Run backup
+      if: needs.deploy-dp.result == 'failure'
+      run: |       
+        sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
+        sudo systemctl restart kong
+
   deploy-workspace-AI:  
     needs: deploy-cp
     runs-on: kong
