@@ -42,7 +42,7 @@ jobs:
       run: sudo kong check ./Develop/setting/uat/dp/kong.conf
 
   deploy-cp:
-    needs: check-cp-disk-space-conf
+    needs: check-dp-disk-space-conf
     runs-on: kong
     name: Deploying Kong cp
     environment: play
@@ -176,7 +176,7 @@ jobs:
         sudo systemctl restart kong
 
   deploy-workspace-AI:  
-    needs: deploy-cp
+    needs: deploy-dp
     runs-on: kong
     name: Deploying Workspace AI
     environment: play
@@ -213,7 +213,7 @@ jobs:
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
   deploy-workspace-OO:  
-      needs: deploy-cp
+      needs: deploy-dp
       runs-on: kong
       name: Deploying Workspace OO
       environment: play
