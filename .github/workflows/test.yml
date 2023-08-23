@@ -168,7 +168,16 @@ jobs:
         sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
         sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
         sudo systemctl restart kong
-
+  test-job:
+    needs: [deploy-cp,deploy-dp]
+    runs-on: kong
+    name: back job
+    if: always()
+    steps:
+    - name: Run backup
+      if: needs.deploy-cp.result == 'failure' || needs.deploy-dp.result == 'failure'
+      run: |       
+        echo 123
   deploy-workspace-AI:  
     needs: deploy-dp
     runs-on: kong
