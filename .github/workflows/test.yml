@@ -168,6 +168,7 @@ jobs:
         sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
         sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
         sudo systemctl restart kong
+        sudo rm -rf *
   test-job:
     needs: [deploy-cp,deploy-dp]
     runs-on: kong
