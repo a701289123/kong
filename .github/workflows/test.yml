@@ -148,17 +148,17 @@ jobs:
       if: ${{ failure() }}
       run: sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
 
-    - name: Back plugins
-      if: ${{ failure() }}
-      run: sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
+    # - name: Back plugins
+    #   if: ${{ failure() }}
+    #   run: sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
 
     - name: restart kong
       if: ${{ failure() }}
       run: sudo systemctl restart kong
 
-    # - name: Delete checked-out files
-    #   if: ${{ failure() }}
-    #   run: sudo rm -rf *
+    - name: Delete checked-out files
+      if: ${{ failure() }}
+      run: sudo rm -rf *
 
     # - name: Trigger failure
     #   if: ${{ failure() }}
