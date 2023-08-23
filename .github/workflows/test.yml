@@ -98,10 +98,6 @@ jobs:
       if: ${{ failure() }}
       run: sudo rm -rf *
 
-    # - name: Trigger failure
-    #   if: ${{ failure() }}
-    #   run: exit 1
-
   deploy-dp:
     needs: deploy-cp
     runs-on: kong-dp
@@ -159,10 +155,6 @@ jobs:
     - name: Delete checked-out files
       if: ${{ failure() }}
       run: sudo rm -rf *
-
-    # - name: Trigger failure
-    #   if: ${{ failure() }}
-    #   run: exit 1
 
   back-cp:
     needs: deploy-dp
