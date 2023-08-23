@@ -1,9 +1,8 @@
 _format_version: "1.1"
-_workspace: test1
 services:
 - connect_timeout: 60000
   host: pkc-5m9gg.eastasia.azure.confluent.cloud
-  name: E2AClickstream1-wtchk
+  name: E2AClickstream1-wtchk4
   path: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-recomm-masked-wtchk-dev/records
   port: 443
   protocol: https
@@ -12,7 +11,7 @@ services:
   write_timeout: 60000
 - connect_timeout: 60000
   host: pkc-5m9gg.eastasia.azure.confluent.cloud
-  name: E2AClickstream1-wtctw
+  name: E2AClickstream1-wtctw4
   path: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-recomm-masked-wtctw-dev/records
   port: 443
   protocol: https
@@ -20,7 +19,20 @@ services:
   retries: 5
   routes:
   - https_redirect_status_code: 426
-    name: E2AClickstream-0807-3
+    name: E2A10-0821-mr-def-123
+    path_handling: v0
+    paths:
+    - /haha
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: E2AClickstream10
     path_handling: v0
     paths:
     - ~/ai/v2/tracking/(?<bu>[^/]+)/events
@@ -30,7 +42,7 @@ services:
         custom_fields_by_lua: {}
         flush_timeout: 2
         headers: {}
-        http_endpoint: http://192.168.133.140:31311
+        http_endpoint: http://192.168.133.134:31311
         keepalive: 60000
         method: POST
         queue:
@@ -131,19 +143,6 @@ services:
       - grpcs
       - http
       - https
-    preserve_host: false
-    protocols:
-    - http
-    - https
-    regex_priority: 0
-    request_buffering: true
-    response_buffering: true
-    strip_path: true
-  - https_redirect_status_code: 426
-    name: E2AE2A-0731-2-mr-test1
-    path_handling: v0
-    paths:
-    - /123/test/abc
     preserve_host: false
     protocols:
     - http

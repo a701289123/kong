@@ -1,13 +1,5 @@
 name: Run Deploying vm
 on:
-  # push:
-  #   branches:
-  #     - 'main'
-  #   paths:
-  #     - 'js/**'
-  #     - 'kong-conf/**'
-  #     - 'deck/**'
-  #     - 'deck-test1/**'
   workflow_dispatch:
 
 
@@ -17,6 +9,8 @@ jobs:
     name: Check disk space
     environment: play
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2.5.0
     - name: Check disk space
       run: |
         AVAILABLE_SPACE=$(df / | awk 'NR==2 {print $4}')
@@ -25,65 +19,82 @@ jobs:
           echo "Error: Less than 1GB of disk space available"
           exit 1
         fi
+    - name: check conf
+      id: check_conf
+      run: sudo kong check ./kong-conf/kong.conf
   deploy-cp-js:
     needs: Check-disk-space
     runs-on: kong
-    name: Deploying Kong cp
+    name: Deploying Kong cp js
     environment: play
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.5.0
-    - name: Setup Node
-      uses: actions/setup-node@v3.5.1
-      with:
-        node-version: "16"
+    - name: Create backup directory
+      run: sudo mkdir -p ./backup-js/
+    - name: backup-js
+      run: sudo cp -rf /usr/local/kong/js-plugins/*.js ./backup-js/
+    - name: Change permissions
+      run: sudo chmod -R 777 ./backup-js/
     - name: copyfile-js
       run: sudo cp -rf ./js/* /usr/local/kong/js-plugins
-
-    - name: copyfile-backup
-      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf 
-
-    - name: copyfile-kogconf
-      run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
-
     - name: Run npm install in 
       run: |
         cd /usr/local/kong/js-plugins
         npm install
+  deploy-cp-conf:
+    needs: deploy-cp-js
+    runs-on: kong
+    name: Deploying Kong cp
+    environment: play
+    steps:
+    # - name: Setup Node
+    #   uses: actions/setup-node@v3.5.1
+    #   with:
+    #     node-version: "16"
+    - name: copyfile-backup
+      run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf    
+
+    - name: copyfile-kogconf
+      run: sudo cp -f ./kong-conf/kong.conf /etc/kong/kong.conf
 
     - name: restart kong
       run: sudo systemctl restart kong
 
     - name: Back kogconf
       if: ${{ failure() }}
-      run: cp -f ./kongbackup.conf /etc/kong/kong.conf
+      run: sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
+
+    - name: Back plugins
+      if: ${{ failure() }}
+      run: sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
 
     - name: restart kong
       if: ${{ failure() }}
       run: sudo systemctl restart kong
 
+    - name: Delete checked-out files
+      if: ${{ failure() }}
+      run: sudo rm -rf *
+    
     - name: Trigger failure
       if: ${{ failure() }}
-      continue-on-error: true
       run: exit 1
+
   deploy-deck:  
-    needs: deploy-cp-js
+    needs: deploy-cp-conf
     runs-on: kong
     name: Deploying Workspace def
     environment: play
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.5.0
-    - name: Setup Node
-      uses: actions/setup-node@v3.5.1
-      with:
-        node-version: "16"
+    # - name: Setup Node
+    #   uses: actions/setup-node@v3.5.1
+    #   with:
+    #     node-version: "16"
 
     - name: Display decK Version
       run: deck version
 
     - name: Backup existing configuration for a specific tag
-      run: deck dump -o kong-dev.yaml --tls-skip-verify
+      run: deck dump -o kong-dev-deck.yaml --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -105,29 +116,27 @@ jobs:
 
     - name: Back out changes on failure
       if: ${{ failure() }}
-      run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+      run: deck sync  -s kong-dev-deck.yaml  --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
   deploy-deck-test1:  
-      needs: deploy-cp-js
+      needs: deploy-cp-conf
       runs-on: kong
       name: Deploying Workspace def-test1
       environment: play
       steps:
-      - name: Checkout
-        uses: actions/checkout@v2.5.0
-      - name: Setup Node
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: "16"
+      # - name: Setup Node
+      #   uses: actions/setup-node@v3.5.1
+      #   with:
+      #     node-version: "16"
 
       - name: Display decK Version
         run: deck version
 
       - name: Backup existing configuration for a specific tag
-        run: deck dump -o kong-dev.yaml --tls-skip-verify
+        run: deck dump -o kong-dev-deck-test.yaml --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -149,8 +158,17 @@ jobs:
 
       - name: Back out changes on failure
         if: ${{ failure() }}
-        run: deck sync  -s kong-dev.yaml  --tls-skip-verify
+        run: deck sync  -s kong-dev-deck-test.yaml  --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+  clear:
+      needs: [deploy-deck-test1,deploy-deck]
+      runs-on: kong
+      name: clear flows
+      environment: play
+      steps:
+      - name: Delete checked-out files
+        run: sudo rm -rf *
+
         
