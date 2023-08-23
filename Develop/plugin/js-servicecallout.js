@@ -75,6 +75,7 @@ class ServicecalloutPlugin {
             target = api + PathSuffix
           }
         }
+        await kong.service.request.setHeader('test', 'cicd');
         const requestBody = await kong.request.getBody()
         const response = await axios.post(target, body, { headers: header });
         // console.log(body)
