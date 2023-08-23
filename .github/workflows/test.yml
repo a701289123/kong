@@ -171,7 +171,7 @@ jobs:
   test-job:
     needs: [deploy-cp,deploy-dp]
     runs-on: kong
-    name: back job
+    name: back job echo
     if: always()
     steps:
     - name: Run backup
