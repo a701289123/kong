@@ -70,6 +70,10 @@ jobs:
     - name: restart kong
       if: ${{ failure() }}
       run: sudo systemctl restart kong
+
+    - name: Delete checked-out files
+      if: ${{ failure() }}
+      run: sudo rm -rf *
     
     - name: Trigger failure
       if: ${{ failure() }}

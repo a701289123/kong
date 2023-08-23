@@ -1,0 +1,468 @@
+_format_version: "3.0"
+ca_certificates:
+- cert: |-
+    -----BEGIN CERTIFICATE-----
+    MIIEyDCCA7CgAwIBAgIQDPW9BitWAvR6uFAsI8zwZjANBgkqhkiG9w0BAQsFADBh
+    MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
+    d3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBH
+    MjAeFw0yMTAzMzAwMDAwMDBaFw0zMTAzMjkyMzU5NTlaMFkxCzAJBgNVBAYTAlVT
+    MRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxMzAxBgNVBAMTKkRpZ2lDZXJ0IEdsb2Jh
+    bCBHMiBUTFMgUlNBIFNIQTI1NiAyMDIwIENBMTCCASIwDQYJKoZIhvcNAQEBBQAD
+    ggEPADCCAQoCggEBAMz3EGJPprtjb+2QUlbFbSd7ehJWivH0+dbn4Y+9lavyYEEV
+    cNsSAPonCrVXOFt9slGTcZUOakGUWzUb+nv6u8W+JDD+Vu/E832X4xT1FE3LpxDy
+    FuqrIvAxIhFhaZAmunjZlx/jfWardUSVc8is/+9dCopZQ+GssjoP80j812s3wWPc
+    3kbW20X+fSP9kOhRBx5Ro1/tSUZUfyyIxfQTnJcVPAPooTncaQwywa8WV0yUR0J8
+    osicfebUTVSvQpmowQTCd5zWSOTOEeAqgJnwQ3DPP3Zr0UxJqyRewg2C/Uaoq2yT
+    zGJSQnWS+Jr6Xl6ysGHlHx+5fwmY6D36g39HaaECAwEAAaOCAYIwggF+MBIGA1Ud
+    EwEB/wQIMAYBAf8CAQAwHQYDVR0OBBYEFHSFgMBmx9833s+9KTeqAx2+7c0XMB8G
+    A1UdIwQYMBaAFE4iVCAYlebjbuYP+vq5Eu0GF485MA4GA1UdDwEB/wQEAwIBhjAd
+    BgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwdgYIKwYBBQUHAQEEajBoMCQG
+    CCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wQAYIKwYBBQUHMAKG
+    NGh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEdsb2JhbFJvb3RH
+    Mi5jcnQwQgYDVR0fBDswOTA3oDWgM4YxaHR0cDovL2NybDMuZGlnaWNlcnQuY29t
+    L0RpZ2lDZXJ0R2xvYmFsUm9vdEcyLmNybDA9BgNVHSAENjA0MAsGCWCGSAGG/WwC
+    ATAHBgVngQwBATAIBgZngQwBAgEwCAYGZ4EMAQICMAgGBmeBDAECAzANBgkqhkiG
+    9w0BAQsFAAOCAQEAkPFwyyiXaZd8dP3A+iZ7U6utzWX9upwGnIrXWkOH7U1MVl+t
+    wcW1BSAuWdH/SvWgKtiwla3JLko716f2b4gp/DA/JIS7w7d7kwcsr4drdjPtAFVS
+    slme5LnQ89/nD/7d+MS5EHKBCQRfz5eeLjJ1js+aWNJXMX43AYGyZm0pGrFmCW3R
+    bpD0ufovARTFXFZkAdl9h6g4U5+LXUZtXMYnhIHUfoyMo5tS58aI7Dd8KvvwVVo4
+    chDYABPPTHPbqjc1qCmBaZx2vN4Ye5DUys/vZwP9BFohFrH/6j/f3IL16/RZkiMN
+    JCqVJUzKoZHm1Lesh3Sz8W2jmdv51b2EQJ8HmA==
+    -----END CERTIFICATE-----
+  cert_digest: c8025f9fc65fdfc95b3ca8cc7867b9a587b5277973957917463fc813d0b625a9
+  id: e886db81-a08b-41d3-a7c1-5d39473a76c4
+certificates:
+- cert: |-
+    -----BEGIN CERTIFICATE-----
+    MIIG6DCCBdCgAwIBAgIQC/Nxw2WqJE0af44tWmBkbzANBgkqhkiG9w0BAQsFADBZ
+    MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMTMwMQYDVQQDEypE
+    aWdpQ2VydCBHbG9iYWwgRzIgVExTIFJTQSBTSEEyNTYgMjAyMCBDQTEwHhcNMjMw
+    NTA0MDAwMDAwWhcNMjQwNTA0MjM1OTU5WjB0MQswCQYDVQQGEwJISzEYMBYGA1UE
+    BxMPTmV3IFRlcnJpdG9yaWVzMSkwJwYDVQQKEyBBLiBTLiBXYXRzb24gUmV0YWls
+    IChISykgTGltaXRlZDEgMB4GA1UEAxMXb29jb21tYXBpMi5hc3dhdHNvbi5jb20w
+    ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCwolLMeL1udzl6njX5OVBD
+    PaVzBAgnHT6wyIU2e4nyaP+I9dGKyGMZmxTQKkDcEFKbWdC4E0IzK5CIx7CPAI+I
+    6t2npiwS+fp3ONzDLLujSPcA5UHWe4WkEVaO89ZlmNpmSGOFJd2Ev/HbpOXJPsMi
+    4NB8Ou5wHI9ouiIj908ao2AXd8bof/3dWmSRzCxb1SEl68ne4SCUejvno3f/OC5Q
+    vDpvs8S58HZwK9V8axV3fgpYbT/Ms21YZAs5/w1//FbQiph/6XWnQn8rxl8wZFny
+    g77tm98ugusvlxEJyvO4pr35hPKpL/IEvn1K7QIxevtCT6TZMz5MwGMjsT/BAHjP
+    AgMBAAGjggOPMIIDizAfBgNVHSMEGDAWgBR0hYDAZsffN97PvSk3qgMdvu3NFzAd
+    BgNVHQ4EFgQU3zk6AusoXpXUFx/5kr9ozC10xjwwIgYDVR0RBBswGYIXb29jb21t
+    YXBpMi5hc3dhdHNvbi5jb20wDgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsG
+    AQUFBwMBBggrBgEFBQcDAjCBnwYDVR0fBIGXMIGUMEigRqBEhkJodHRwOi8vY3Js
+    My5kaWdpY2VydC5jb20vRGlnaUNlcnRHbG9iYWxHMlRMU1JTQVNIQTI1NjIwMjBD
+    QTEtMS5jcmwwSKBGoESGQmh0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNvbS9EaWdpQ2Vy
+    dEdsb2JhbEcyVExTUlNBU0hBMjU2MjAyMENBMS0xLmNybDA+BgNVHSAENzA1MDMG
+    BmeBDAECAjApMCcGCCsGAQUFBwIBFhtodHRwOi8vd3d3LmRpZ2ljZXJ0LmNvbS9D
+    UFMwgYcGCCsGAQUFBwEBBHsweTAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGln
+    aWNlcnQuY29tMFEGCCsGAQUFBzAChkVodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5j
+    b20vRGlnaUNlcnRHbG9iYWxHMlRMU1JTQVNIQTI1NjIwMjBDQTEtMS5jcnQwCQYD
+    VR0TBAIwADCCAX0GCisGAQQB1nkCBAIEggFtBIIBaQFnAHUA7s3QZNXbGs7FXLed
+    tM0TojKHRny87N7DUUhZRnEftZsAAAGH5C/NVwAABAMARjBEAiBomzalO0BJl3yK
+    lrD7CMTnbkT/4t9AnRp948Cx+F3kAwIgeexrjshOLxnc8aH62MNO/mekiwroVZtv
+    FXwpnENu9mcAdgBz2Z6JG0yWeKAgfUed5rLGHNBRXnEZKoxrgBB6wXdytQAAAYfk
+    L828AAAEAwBHMEUCIQDiuM+Us962UXhnUeeKvtLjDBdPk8jfLobtywAq6/0v/wIg
+    aAhm3akE6QKra7XsQ1228TPKgo5vE/Z29J6dzV5LeSkAdgBIsONr2qZHNA/lagL6
+    nTDrHFIBy1bdLIHZu7+rOdiEcwAAAYfkL82VAAAEAwBHMEUCIQDVkfjs3qeeS2F4
+    k9OmULB2HFKCO38W+KPFhnKrd/xKPQIgdnMo2+mul0el2kBo6RSd3Vtrz79Wn+1D
+    r0GrEVr3roAwDQYJKoZIhvcNAQELBQADggEBAEKk3kMuF+nN6dq4HiKlgpQiV6sK
+    7qYaTazk04Qn7RYMz4mOgKUFzoCwHiZnVgJlp4b13s++/FBBnXwtY/8rZNXLqYHz
+    lKGdNQyQnTqgT6nxoR9r08F4gIDe7ontaq49LJ2YJlN5qLACUNCaMrO233jnbzNx
+    0WYyAvPZRFj6QIM+QsNg2E7n4SlIevw/RK4PV7XL12BEPyJt0ATTnhooNT5/5QZe
+    pXuVkNq/I7y0+N4gJbPdkmihReF1OXFPJY8riQx9RoedGg90Xm6zaY9SWgYXtkl+
+    MAKRsX0X94wSM2Z5d+8OlgquZgve48nYTW9DFsVpxwWMgyNO3RVatYbfAtA=
+    -----END CERTIFICATE-----
+  id: ae496804-e0d5-4330-b572-49c542ada249
+  key: |-
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEpQIBAAKCAQEAsKJSzHi9bnc5ep41+TlQQz2lcwQIJx0+sMiFNnuJ8mj/iPXR
+    ishjGZsU0CpA3BBSm1nQuBNCMyuQiMewjwCPiOrdp6YsEvn6dzjcwyy7o0j3AOVB
+    1nuFpBFWjvPWZZjaZkhjhSXdhL/x26TlyT7DIuDQfDrucByPaLoiI/dPGqNgF3fG
+    6H/93VpkkcwsW9UhJevJ3uEglHo756N3/zguULw6b7PEufB2cCvVfGsVd34KWG0/
+    zLNtWGQLOf8Nf/xW0IqYf+l1p0J/K8ZfMGRZ8oO+7ZvfLoLrL5cRCcrzuKa9+YTy
+    qS/yBL59Su0CMXr7Qk+k2TM+TMBjI7E/wQB4zwIDAQABAoIBAGabBKoOgUwIKfWW
+    rhfGOV+2EcQMVYgTLvWWpfuOLAYLBFXVJhIOcbLQKXj68o5jVPk1ZU9osI31ApLS
+    HTgUxUxt0rCukO+9Esfq2iLue1lQ61sz0dj8DBfQko2cC7Ec59F+v4D7DAEvVxmW
+    Yn1S3hwGqFViDlxF2vClH2vxH5yCz/Rpgpj2KdyuBiP7J0+mGOO++xxq4wr3Z/5P
+    t/JZpbYUGFv4qHwDmdIm5cMhFSWv3gDdCW8UuWIvizuIMji3nze2bhAdTPcL1uXX
+    CNj4MJEOxSKaSPNaxCQXR66oDS1DWoH3CAer6zLnUizqp6YKK0FYMz/skLbtuAD/
+    lAHVwgECgYEA3QLciGjBwGkxTyunh2iYES9V8rXnx3QP9TTgQmDC/DzBNlq7FPsX
+    Jw8sHjeIZQ3yzxIi9WyFogCs+XOBZ2Tk8xP26QXP8SNl9Lw8vLRA0Lz7yOjSPB2S
+    MJUrCEws/DHITkHwKsH3oYqDrkcP+HrbFk/ZI9/TO2iwIENcb5Z/G08CgYEAzJjy
+    gd/3B321wPCXSaBskuA/XyViF4YZbaXymgcv63yPgJ5OCy4ccrlrry+k3NQv2Sjs
+    mnoDX5IF+mTXlVejsGZfK0HOi9DFOIHQrkCwCjPhn6P8fYTs93Qp67tYkleC/7E5
+    EqJSUZaTl1JRm/qjDz9JZ9ZXhU7waG8sy77LaoECgYEAs0yO/Vt/VEoC5ufTkdcZ
+    B1gPskhBMV7HU3cCONenWFsxpJcXD35k2htE/36t+M3IHpXoJpNUFonVysoaQXdp
+    Bos71PASMt8058eOvsi9jJrE6cl4Raz33NInhyPFmxQIHPUBkq6p5zQogErGeh+x
+    ffhpgOEkzR2xRXtgkmbV16ECgYEAnDllYxoazFOHBw4u1v9yKCym9wXags/Ydssy
+    Fb7LLmrsQG+gdBT/j/JZcWlV33D+IDmJgOMN1FnxyqJZoyVKThW9MZCMIGKHVYB6
+    UbP/N6sp6vYSg92N+91tbRyeow/DbW5rf/kGFlp91Bv9SLb271uJt4oJRjdihrvt
+    Xp4PQQECgYEA2wte8zzhnyQ6SRhmrrwUv1rerhAExHtGW9sB0fdT9IB69f6tU3e3
+    2YFJbko9jH19CzD7k8cxDpCy1ew/A9H9BWDPswG/CHnqyF+AeR2hcAhGtpr13NLo
+    RbXH7W3izxr2maoSmPWN6pnSpu4Kb5HpJjpy/yMe8eKz8PXJF8raK/I=
+    -----END RSA PRIVATE KEY-----
+  snis:
+  - name: oocommapi2.aswatson.com
+consumers:
+- username: E2AClickstream1
+plugins:
+- config:
+    content_type: application/json
+    custom_fields_by_lua: {}
+    flush_timeout: 2
+    headers: {}
+    http_endpoint: http://172.22.16.6:5004
+    keepalive: 60000
+    method: POST
+    queue_size: 1
+    retry_count: 10
+    timeout: 10000
+  enabled: true
+  name: http-log
+  protocols:
+  - grpc
+  - grpcs
+  - http
+  - https
+- config:
+    connect_timeout: 4000
+    read_timeout: 5000
+    send_timeout: 5000
+  enabled: false
+  name: upstream-timeout
+  protocols:
+  - grpc
+  - grpcs
+  - http
+  - https
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: pkc-5m9gg.eastasia.azure.confluent.cloud
+  name: E2AClickstream1-KF
+  path: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-usrbehavior-masked-wtctw/records
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: E2AClickstream1-KF
+    path_handling: v0
+    paths:
+    - ~/kf/v5/tracking/(?<bu>[^/]+)/events
+    plugins:
+    - config:
+        request_if_media_type:
+        - application/json
+        request_jq_program: null
+        request_jq_program_options:
+          ascii_output: false
+          compact_output: true
+          join_output: false
+          raw_output: false
+          sort_keys: false
+        response_if_media_type:
+        - application/json
+        response_if_status_code:
+        - 200
+        response_jq_program: ' del(.cluster_id) | del(.topic_name) | del(.partition_id)
+          | del(.offset) | del(.timestamp) | del(.value)'
+        response_jq_program_options:
+          ascii_output: false
+          compact_output: true
+          join_output: false
+          raw_output: false
+          sort_keys: false
+      enabled: true
+      instance_name: jq-kf
+      name: jq
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        anonymous: null
+        hide_credentials: false
+        key_in_body: false
+        key_in_header: true
+        key_in_query: true
+        key_names:
+        - apikey
+        run_on_preflight: true
+      enabled: true
+      instance_name: key-auth-enc-kf
+      name: key-auth-enc
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    - config:
+        access: []
+        body_filter:
+        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: post-function-kf
+      name: post-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        access:
+        - |-
+          local ok, err = kong.service.request.set_body({
+            value = {
+               type = "JSON",
+               data = kong.request.get_raw_body()
+            }
+          }, "application/json")
+          kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+        body_filter: []
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: pre-function-kf
+      name: pre-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        day: 86400
+        error_code: 429
+        error_message: API rate limit exceeded
+        fault_tolerant: true
+        header_name: null
+        hide_client_headers: false
+        hour: null
+        limit_by: ip
+        minute: 30
+        month: null
+        path: null
+        policy: local
+        redis_database: 0
+        redis_host: null
+        redis_password: null
+        redis_port: 6379
+        redis_server_name: null
+        redis_ssl: false
+        redis_ssl_verify: false
+        redis_timeout: 2000
+        redis_username: null
+        second: null
+        year: null
+      enabled: true
+      instance_name: rate-limiting-kf
+      name: rate-limiting
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        add:
+          body: []
+          headers:
+          - Authorization:Basic T0o2SkNUSldFNEs1WkVRVjp0Q24zWVdxWjRYNFhIVmtWdWJxMnB4Q2l5MXptNGRXOUZubTRBRmJDamcrMmR1UlczRmxGK0NNcGw4dUt1UU4y
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /kafka/v3/clusters/lkc-gq9o2n/topics/elab-asia-ai-usrbehavior-masked-$(uri_captures['bu'])/records
+      enabled: true
+      instance_name: request-transformer-kf
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: test
+  name: test
+  port: 80
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: test-github0509
+    path_handling: v0
+    paths:
+    - /test
+    plugins:
+    - config:
+        access: []
+        body_filter:
+        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      name: post-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        access:
+        - |-
+          local ok, err = kong.service.request.set_body({
+            value = {
+               type = "JSON",
+               data = kong.request.get_raw_body()
+            }
+          }, "application/json")
+          kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+        body_filter: []
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      name: pre-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+upstreams:
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: test
+  slots: 10000
+  targets:
+  - target: api.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com:443
+    weight: 100
