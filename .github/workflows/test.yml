@@ -175,7 +175,6 @@ jobs:
       run: |       
         sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
         sudo systemctl restart kong
-        exit 1
 
   deploy-workspace-AI:  
     needs: deploy-dp
