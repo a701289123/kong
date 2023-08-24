@@ -61,9 +61,8 @@ jobs:
     - name: backup-js
       run: sudo find /usr/local/kong/js-plugins/ -path /usr/local/kong/js-plugins/node_modules -prune -o -name "*.js" -exec cp -t ./backup-js/ {} +
 
-
-    - name: Change permissions
-      run: sudo chmod -R 777 ./backup-js/
+    # - name: Change permissions
+    #   run: sudo chmod -R 777 ./backup-js/
 
     - name: copyfile-js
       run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/    
@@ -117,8 +116,8 @@ jobs:
     - name: backup-js
       run: sudo find /usr/local/kong/js-plugins/ -path /usr/local/kong/js-plugins/node_modules -prune -o -name "*.js" -exec cp -t ./backup-js/ {} +
 
-    - name: Change permissions
-      run: sudo chmod -R 777 ./backup-js/
+    # - name: Change permissions
+    #   run: sudo chmod -R 777 ./backup-js/
 
     - name: copyfile-js
       run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/
