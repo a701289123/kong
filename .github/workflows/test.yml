@@ -6,7 +6,7 @@ on:
 jobs:
   check-cp-disk-space-conf:
       runs-on: kong
-      name: Check cp disk space
+      name: Check cp disk space and conf
       environment: play
       steps:
       - name: Checkout
@@ -25,7 +25,7 @@ jobs:
   check-dp-disk-space-conf:
     needs: check-cp-disk-space-conf
     runs-on: kong-dp
-    name: Check dp disk space
+    name: Check dp disk space and conf
     environment: play
     steps:
     - name: Checkout
@@ -42,7 +42,7 @@ jobs:
       run: sudo kong check ./Develop/setting/uat/dp/kong.conf
 
   deploy-cp:
-    needs: check-dp-disk-space-conf
+    needs: [check-dp-disk-space-conf, check-cp-disk-space-conf]
     runs-on: kong
     name: Deploying Kong cp
     environment: play
@@ -158,7 +158,7 @@ jobs:
   back-cp:
     needs: deploy-dp
     runs-on: kong
-    name: back job
+    name: back cp job
     if: always()
     steps:
     - name: Run backup
@@ -168,16 +168,16 @@ jobs:
         sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
         sudo systemctl restart kong
         sudo rm -rf *
-  test-job:
-    needs: [deploy-cp,deploy-dp]
-    runs-on: kong
-    name: back job echo
-    if: always()
-    steps:
-    - name: Run backup
-      if: needs.deploy-cp.result == 'failure' || needs.deploy-dp.result == 'failure'
-      run: |       
-        echo 123
+  # test-job:
+  #   needs: [deploy-cp,deploy-dp]
+  #   runs-on: kong
+  #   name: back job echo
+  #   if: always()
+  #   steps:
+  #   - name: Run backup
+  #     if: needs.deploy-cp.result == 'failure' || needs.deploy-dp.result == 'failure'
+  #     run: |       
+  #       echo 123
   deploy-workspace-AI:  
     needs: deploy-dp
     runs-on: kong
