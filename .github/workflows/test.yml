@@ -188,7 +188,7 @@ jobs:
       run: deck version
 
     - name: Backup existing configuration for a specific tag
-      run: deck dump -o kong-dev-AI.yaml --tls-skip-verify
+      run: deck dump --workspace AI -o kong-dev-AI.yaml --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -197,20 +197,20 @@ jobs:
       run: deck validate -s ./Develop/workspace/AI
 
     - name: Compare Configurations
-      run: deck diff -s ./Develop/workspace/AI --tls-skip-verify
+      run: deck diff --workspace AI -s ./Develop/workspace/AI --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Apply new configuration
-      run: deck sync  -s ./Develop/workspace/AI --tls-skip-verify
+      run: deck sync --workspace AI  -s ./Develop/workspace/AI --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
     - name: Back out changes on failure
       if: ${{ failure() }}
-      run: deck sync  -s kong-dev-AI.yaml  --tls-skip-verify
+      run: deck sync --workspace AI -s kong-dev-AI.yaml  --tls-skip-verify
       env:
         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -225,7 +225,7 @@ jobs:
         run: deck version
 
       - name: Backup existing configuration for a specific tag
-        run: deck dump --workspace test1 -o kong-dev-OO.yaml --tls-skip-verify
+        run: deck dump --workspace OO -o kong-dev-OO.yaml --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
@@ -234,20 +234,20 @@ jobs:
         run: deck validate -s ./Develop/workspace/OO
 
       - name: Compare Configurations
-        run: deck diff --workspace test1 -s ./Develop/workspace/OO --tls-skip-verify
+        run: deck diff --workspace OO -s ./Develop/workspace/OO --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
       - name: Apply new configuration
-        run: deck sync --workspace test1 -s ./Develop/workspace/OO --tls-skip-verify
+        run: deck sync --workspace OO -s ./Develop/workspace/OO --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
       - name: Back out changes on failure
         if: ${{ failure() }}
-        run: deck sync --workspace test1 -s kong-dev-OO.yaml  --tls-skip-verify
+        run: deck sync --workspace OO -s kong-dev-OO.yaml  --tls-skip-verify
         env:
           DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
           DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
