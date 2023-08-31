@@ -1,0 +1,2905 @@
+_format_version: "3.0"
+_info:
+  defaults: {}
+  select_tags:
+  - prod
+_workspace: AI
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: mmedia.app.aswatson.com
+  name: E2ABeautyProfile3-AI
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      key_in_body: false
+      key_in_header: true
+      key_in_query: true
+      key_names:
+      - apikey
+      run_on_preflight: true
+    enabled: true
+    instance_name: E2ABeautyProfile3-AI-key-auth
+    name: key-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  - config:
+      access: []
+      body_filter:
+      - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: E2ABeautyProfile3-AI-post-function
+    name: post-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      access:
+      - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+      body_filter: []
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: E2ABeautyProfile3-AI-pre-function
+    name: pre-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      add:
+        headers:
+        - Access-Control-Allow-Origin:*
+        - Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept
+        if_status: []
+        json: []
+        json_types: []
+      allow:
+        json: null
+      append:
+        headers: []
+        if_status: []
+        json: []
+        json_types: []
+      dots_in_keys: true
+      remove:
+        headers: []
+        if_status: []
+        json: []
+      rename:
+        headers: []
+        if_status: []
+      replace:
+        body: null
+        headers: []
+        if_status: []
+        json: []
+        json_types: []
+      transform:
+        functions: []
+        if_status: []
+        json: []
+    enabled: true
+    instance_name: E2ABeautyProfile3-AI-response-transformer-advanced
+    name: response-transformer-advanced
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: E2ABeautyProfileGetBaseProduct1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/getBaseProduct/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /foundation-finder/getbaseproduct
+      enabled: true
+      instance_name: E2ABeautyProfileGetBaseProduct1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: WTCHK-o2ai
+  name: MVP
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      key_in_body: false
+      key_in_header: true
+      key_in_query: true
+      key_names:
+      - apikey
+      run_on_preflight: true
+    enabled: true
+    instance_name: MVP-key-auth
+    name: key-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  - config:
+      access: []
+      body_filter:
+      - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: MVP-post-function
+    name: post-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      access:
+      - |-
+        kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+        local path = kong.request.get_path()
+        if string.find(path,'wtchk') then
+        kong.service.request.add_header("x-functions-key", "GkEA8wSE1V3gPZjntiA5In4gvhU1xn3gwc1dhkNdRhfUAzFuoQ8ObA==")
+        kong.service.request.add_header("bu", "wtchk")
+        end
+        if string.find(path,'wtcsg') then
+        kong.service.request.add_header("x-functions-key", "Bsj5kBG6wMO2frEFp_14Ed38_MvqacqDBUU4InDSAG-6AzFuig0oEQ==")
+        kong.service.request.add_header("bu", "wtcsg")
+        end
+        if string.find(path,'wtctw') then
+        kong.service.request.add_header("x-functions-key", "T64BLJJpfcQp3E7QEzdIpWeXW4nvB25lclZkf5Ps883sAzFuy7YKrQ==")
+        kong.service.request.add_header("bu", "wtctw")
+        end
+        if string.find(path,'wtcth') then
+        kong.service.request.add_header("x-functions-key", "AhXXFyo3NJnl9EbV5RzmPgqBwYFQhZkRqbWDh5hhfuSfAzFuxtJpbQ==")
+        kong.service.request.add_header("bu", "wtcth")
+        end
+        if string.find(path,'wtcid') then
+        kong.service.request.add_header("x-functions-key", "dT0LwyDbTv0aY2tFnGyeppHm52IZvLX-CIp8xQhZtqLDAzFu6rR87w==")
+        kong.service.request.add_header("bu", "wtcid")
+        end
+        if string.find(path,'wtcph') then
+        kong.service.request.add_header("x-functions-key", "2t8YayhZVVhyIGwe-hxOGKkEEyPB_gQOHOnuZno-m0AiAzFuukDYIg==")
+        kong.service.request.add_header("bu", "wtcph")
+        end
+        if string.find(path,'wtcmy') then
+        kong.service.request.add_header("x-functions-key", "MrfwaurIVrW-ft4cVyWFHO4leP3XGFRrjzaw6DZxyQk6AzFuRDzqFA==")
+        kong.service.request.add_header("bu", "wtcmy")
+        end
+        if string.find(path,'pnshk') then
+        kong.service.request.add_header("x-functions-key", "BvBAOGpWfqMTpd2ldG0AatiktuFc-JuCxA5vL1KWygLSAzFuZTXrCA==")
+        kong.service.request.add_header("bu", "pnshk")
+        end
+        if string.find(path,'wtcvn') then
+        kong.service.request.add_header("x-functions-key", "cwO5GdE6tgM7XbsJnYbadPdHo65iFTyxparEpl-Iv4hfAzFumwluYQ==")
+        kong.service.request.add_header("bu", "wtcvn")
+        end
+      body_filter: []
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: MVP-pre-function
+    name: pre-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      add:
+        headers:
+        - Access-Control-Allow-Origin:*
+        - Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept
+        if_status: []
+        json: []
+        json_types: []
+      allow:
+        json: null
+      append:
+        headers: []
+        if_status: []
+        json: []
+        json_types: []
+      dots_in_keys: true
+      remove:
+        headers: []
+        if_status: []
+        json: []
+      rename:
+        headers: []
+        if_status: []
+      replace:
+        body: null
+        headers: []
+        if_status: []
+        json: []
+        json_types: []
+      transform:
+        functions: []
+        if_status: []
+        json: []
+    enabled: true
+    instance_name: MVP-response-transformer-advanced
+    name: response-transformer-advanced
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      rules:
+      - condition:
+          bu: wtchk
+        upstream_name: WTCHK-o2ai
+      - condition:
+          bu: wtcmy
+        upstream_name: WTCMY-o2ai
+      - condition:
+          bu: wtcsg
+        upstream_name: WTCSG-o2ai
+      - condition:
+          bu: wtctw
+        upstream_name: WTCTW-o2ai
+      - condition:
+          bu: wtcph
+        upstream_name: WTCPH-o2ai
+      - condition:
+          bu: wtcth
+        upstream_name: WTCTH-o2ai
+      - condition:
+          bu: wtcid
+        upstream_name: WTCID-o2ai
+      - condition:
+          bu: wtcvn
+        upstream_name: WTCVN-o2ai
+      - condition:
+          bu: pnshk
+        upstream_name: PNSHK-o2ai
+    enabled: true
+    name: route-by-header
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: GetCategoryTagging1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/category/tag/(?<bu>[^/]+)/(?<categoryCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/multilang/categoryKeyword/$(uri_captures['categoryCode'])
+      enabled: true
+      instance_name: GetCategoryTagging1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetColorOfTheYear1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/coty/(?<bu>[^/]+)/(?<colorHexCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodRecomm/coty/$(uri_captures['colorHexCode'])
+      enabled: true
+      instance_name: GetColorOfTheYear1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetComboSet1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/comboset/(?<bu>[^/]+)/product/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/comboSet/product/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetComboSet1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetComplementaryProduct1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/complementary/(?<bu>[^/]+)/product/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/complementary/product/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetComplementaryProduct1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetCustomerLifeValue1
+    path_handling: v0
+    paths:
+    - ~/ai/v3/clv/wtchk/member/(?<memberNumber>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - x-functions-key:GkEA8wSE1V3gPZjntiA5In4gvhU1xn3gwc1dhkNdRhfUAzFuoQ8ObA==
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/wtchk/clv/v2/member/$(uri_captures['memberNumber'])
+      enabled: true
+      instance_name: GetCustomerLifeValue1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetE2AHotKeywords1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/hotKeywords/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/top10SearchKeywords
+      enabled: true
+      instance_name: GetE2AHotKeywords1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetE2ARecencyRealTimeProdRecomm1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedProductRecommendation/browsingHistory/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodRecomm/browsingHistory/member$((function()          local
+            id = headers.memberNumber          if id then                return "/"
+            .. id      end        end )())
+      enabled: true
+      instance_name: GetE2ARecencyRealTimeProdRecomm1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetE2ATop10BrowsedProducts1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/browsed/(?<bu>[^/]+)/category/(?<categoryId>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodRecomm/browsed/category/$(uri_captures['categoryId'])
+      enabled: true
+      instance_name: GetE2ATop10BrowsedProducts1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetE2ATop10PurchasedProducts1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/purchased/(?<bu>[^/]+)/category/(?<categoryId>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodRecomm/purchased/category/$(uri_captures['categoryId'])
+      enabled: true
+      instance_name: GetE2ATop10PurchasedProducts1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetFrequentlyBuyTogether1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/frequentlyBuyTogether/(?<bu>[^/]+)/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/frequentlyBuyTogether/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetFrequentlyBuyTogether1-request-transformer-advanced
+      name: request-transformer-advanced
+      ordering:
+        before:
+          access:
+          - route-by-header
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetPDPProductRecommendation0
+    path_handling: v0
+    paths:
+    - ~/ai/prodrecomm/v1/(?<bu>[^/]+)/products/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecommApp/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetPDPProductRecommendation0-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetPDPProductRecommendation1
+    path_handling: v0
+    paths:
+    - ~/ai/prodrecomm/v2/(?<bu>[^/]+)/products/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetPDPProductRecommendation1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetProductKeyword1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/products/category/(?<bu>[^/]+)/(?<categoryCode>[^/]+)/(?<keywords>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/multilang/productKeyword/$(uri_captures['categoryCode'])/$(uri_captures['keywords'])
+      enabled: true
+      instance_name: GetProductKeyword1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetProductRecommendByOrderHistory1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedProductRecommendation/(?<bu>[^/]+)/member/(?<memberNumber>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: []
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/member/$(uri_captures['memberNumber'])
+      enabled: true
+      instance_name: GetProductRecommendByOrderHistory1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetProductRecommendByOrderHistoryInCategory1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedCategoryKeywords/(?<bu>[^/]+)/member/(?<memberNumber>[^/]+)/category/(?<categoryCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/member/$(uri_captures['memberNumber'])/category/$(uri_captures['categoryCode'])
+      enabled: true
+      instance_name: GetProductRecommendByOrderHistoryInCategory1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetRelataedCategoryTags1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/relatedTags/(?<bu>[^/]+)/category/(?<categoryCode>[^/]+)/product/(?<productCode>[^/]+)/tag/(?<tag>[^/]+)
+    - ~/ai/v2/prodrecomm/relatedTags/(?<bu>[^/]+)/category/(?<categoryCode>[^/]+)/product/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/relatedTags/category/$(uri_captures['categoryCode'])/product/$(uri_captures['productCode'])$((function()      local
+            tag = uri_captures['tag']  if tag  then   return "/" .."tag" .. "/" ..
+            tag end     end )())
+      enabled: true
+      instance_name: GetRelataedCategoryTags1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetRelatedKeywords1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/related/keywords/(?<bu>[^/]+)/(?<keywords>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/multilang/relatedKeywords/$(uri_captures['keywords'])
+      enabled: true
+      instance_name: GetRelatedKeywords1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetRelatedKeywordsForCategory1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/related/category/keywords/(?<bu>[^/]+)/(?<categoryCode>[^/]+)/(?<keyword>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/multilang/relatedKeywords/$(uri_captures['categoryCode'])/$(uri_captures['keyword'])
+      enabled: true
+      instance_name: GetRelatedKeywordsForCategory1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetSearchTermDictionary1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/historySearchTerm/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/searchTermDictionary
+      enabled: true
+      instance_name: GetSearchTermDictionary1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetSearchTermProductClickCount1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/searchTerm/pcCount/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/searchTermProductClickcount
+      enabled: true
+      instance_name: GetSearchTermProductClickCount1-request-transformer-advanced
+      name: request-transformer-advanced
+      ordering:
+        before:
+          access:
+          - route-by-header
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetSimiliarityProductRecommendation1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/similarityProductRecommendation/(?<bu>[^/]+)/products/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/similarity/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetSimiliarityProductRecommendation1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetSubstitutionalProduct1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/prodrecomm/substitutional/(?<bu>[^/]+)/product/(?<productCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/substitutional/$(uri_captures['productCode'])
+      enabled: true
+      instance_name: GetSubstitutionalProduct1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostBeautyProfileRecencyFavBrand1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedBrandRecommendation/bprecency/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/brandRecomm/bprecency
+      enabled: true
+      instance_name: PostBeautyProfileRecencyFavBrand1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostBrandRecommendByCategory1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedBrandRecommendation/category/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/purchasedBrandRecommendation/category
+      enabled: true
+      instance_name: PostBrandRecommendByCategory1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostE2ASurvey1-AI
+    path_handling: v0
+    paths:
+    - ~/e2a/v2/survey/(?<bu>[^/]+)/feedback
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/toggleComment
+      enabled: true
+      instance_name: PostE2ASurvey1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostFlipCard1-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/flipCards/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/flipCards
+      enabled: true
+      instance_name: PostReviewFlipCard1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostFreqRealTimeProdRecomm1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedProductRecommendation/browsingHistoryFrequency/(?<bu>[^/]+)
+    plugins:
+    - config:
+        access:
+        - |
+          kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+
+          local body, err, mimetype = kong.request.get_body()
+          if not err then
+          local memberNumber = body.memberNumber
+          kong.service.request.add_header("memberNumber", memberNumber)
+          end
+
+          local path = kong.request.get_path()
+          if string.find(path,'wtchk') then
+          kong.service.request.add_header("x-functions-key", "GkEA8wSE1V3gPZjntiA5In4gvhU1xn3gwc1dhkNdRhfUAzFuoQ8ObA==")
+          end
+          if string.find(path,'wtcsg') then
+          kong.service.request.add_header("x-functions-key", "Bsj5kBG6wMO2frEFp_14Ed38_MvqacqDBUU4InDSAG-6AzFuig0oEQ==")
+          end
+          if string.find(path,'wtctw') then
+          kong.service.request.add_header("x-functions-key", "T64BLJJpfcQp3E7QEzdIpWeXW4nvB25lclZkf5Ps883sAzFuy7YKrQ==")
+          end
+          if string.find(path,'wtcth') then
+          kong.service.request.add_header("x-functions-key", "AhXXFyo3NJnl9EbV5RzmPgqBwYFQhZkRqbWDh5hhfuSfAzFuxtJpbQ==")
+          end
+          if string.find(path,'wtcid') then
+          kong.service.request.add_header("x-functions-key", "dT0LwyDbTv0aY2tFnGyeppHm52IZvLX-CIp8xQhZtqLDAzFu6rR87w==")
+          end
+          if string.find(path,'wtcph') then
+          kong.service.request.add_header("x-functions-key", "2t8YayhZVVhyIGwe-hxOGKkEEyPB_gQOHOnuZno-m0AiAzFuukDYIg==")
+          end
+          if string.find(path,'wtcmy') then
+          kong.service.request.add_header("x-functions-key", "MrfwaurIVrW-ft4cVyWFHO4leP3XGFRrjzaw6DZxyQk6AzFuRDzqFA==")
+          end
+          if string.find(path,'pnshk') then
+          kong.service.request.add_header("x-functions-key", "BvBAOGpWfqMTpd2ldG0AatiktuFc-JuCxA5vL1KWygLSAzFuZTXrCA==")
+          end
+          if string.find(path,'wtcvn') then
+          kong.service.request.add_header("x-functions-key", "cwO5GdE6tgM7XbsJnYbadPdHo65iFTyxparEpl-Iv4hfAzFumwluYQ==")
+          end
+        body_filter: []
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: PostFreqRealTimeProdRecomm1-pre-function
+      name: pre-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodRecomm/browsingHistoryFrequency/member$((function()          local
+            id = headers.memberNumber          if id then                return "/"
+            .. id      end        end )())
+      enabled: true
+      instance_name: PostFreqRealTimeProdRecomm1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        rules:
+        - condition:
+            bu: wtchk
+          upstream_name: WTCHK-o2ai
+        - condition:
+            bu: wtcmy
+          upstream_name: WTCMY-o2ai
+        - condition:
+            bu: wtcsg
+          upstream_name: WTCSG-o2ai
+        - condition:
+            bu: wtctw
+          upstream_name: WTCTW-o2ai
+        - condition:
+            bu: wtcph
+          upstream_name: WTCPH-o2ai
+        - condition:
+            bu: wtcth
+          upstream_name: WTCTH-o2ai
+        - condition:
+            bu: wtcid
+          upstream_name: WTCID-o2ai
+        - condition:
+            bu: wtcvn
+          upstream_name: WTCVN-o2ai
+        - condition:
+            bu: pnshk
+          upstream_name: PNSHK-o2ai
+      enabled: true
+      name: route-by-header
+      ordering:
+        after:
+          access:
+          - request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostMostFavBrand2
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedBrandRecommendation/orderHistory/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/brandRecomm/orderHistory
+      enabled: true
+      instance_name: PostMostFavBrand2-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostPreference1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/registration/preference/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/preference
+      enabled: true
+      instance_name: PostPreference1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostProductRecommendByOrderHistory2
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedProductRecommendation/orderHistory/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/orderHistory
+      enabled: true
+      instance_name: PostProductRecommendByOrderHistory2-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostProductRecommendByOrderHistoryInCategory2
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedCategoryKeywords/orderHistory/category/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodrecomm/orderHistory/category
+      enabled: true
+      instance_name: PostProductRecommendByOrderHistoryInCategory2-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostPurchasedBrowsedFlipCard1-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/(?<bu>[^/]+)/purchasedBrowsedFlipCard
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/customer_product_like
+      enabled: true
+      instance_name: PostPurchasedBrowsedFlipCard1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    methods:
+    - POST
+    name: PostRecencyRealTimeProdRecomm1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/personalizedProductRecommendation/browsingHistory/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/prodRecomm/browsingHistory/recency
+      enabled: true
+      instance_name: PostRecencyRealTimeProdRecomm1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostReviewFlipCard1-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/reviewFlipCard/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/reviewFlipCard
+      enabled: true
+      instance_name: PostFlipCard1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostSearchPersonalization1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/categorycomm/recency/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/categorycomm/recency
+      enabled: true
+      instance_name: PostSearchPersonalization1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+upstreams:
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: PNSHK-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-pnshk-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCHK-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtchk-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCID-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtcid-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCMY-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtcmy-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCPH-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtcph-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCSG-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtcsg-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCTH-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtcth-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCTW-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtctw-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCVN-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtcvn-prod-eastasia.azurewebsites.net:443
+    weight: 100

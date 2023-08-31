@@ -1,0 +1,1075 @@
+_format_version: "3.0"
+_info:
+  defaults: {}
+  select_tags:
+  - prod
+_workspace: OO
+plugins:
+- config:
+    credentials: false
+    exposed_headers: null
+    headers:
+    - origin
+    - content-type
+    - accept
+    - authorization
+    - cache-control
+    - x-anonymous-consents
+    - x-profile-tag-debug
+    - x-consent-reference
+    - occ-personalization-id
+    - occ-personalization-time
+    - pragma
+    - if-modified-since
+    - vary
+    - queueittoken
+    - queueit-target
+    - apikey
+    - saleschannel
+    - User-Agent
+    - X-JWT-HASH
+    - X-LASTLOGINTIME
+    - X-REGTIME
+    - expires
+    max_age: null
+    methods:
+    - GET
+    - HEAD
+    - PUT
+    - PATCH
+    - POST
+    - DELETE
+    - OPTIONS
+    - TRACE
+    - CONNECT
+    origins:
+    - https://pnshk.cmb8j9fjhz-apj2aswat1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcmy.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+    - http://localhost:80
+    - http://localhost:8080
+    - http://localhost:4000
+    - http://localhost:4200
+    - http://localhost:3000
+    - https://wtchk.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtchk.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://wtchk.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+    - https://wtcsg.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcsg.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcmy.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://wtctw.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtctw.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcph.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcph.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcth.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcth.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcid.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+    - https://wtcid.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://pnshk.cmb8j9fjhz-apj2aswat1-d1-public.model-t.cc.commerce.ondemand.com
+    - https://www.watsons.vn
+    - https://www.watsons.com.hk
+    - https://www.watsons.com.my
+    - https://www.watsons.com.sg
+    - https://www.watsons.com.tw
+    - https://www.watsons.com.ph
+    - https://www.watsons.co.id
+    - https://www.watsons.co.th
+    - https://www.parknshop.com
+    - https://oocommapi-dev.aswatson.com
+    - https://vision.googleapis.com
+    - https://wtc*.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+    - https://wtchk.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+    - https://wtctw.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+    - https://wtctw.uat.wingwongwow.com
+    - https://wtcph.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+    - https://wtchk.uat.web3.aswatson.com
+    - https://wtcmy.uat.web3.aswatson.com
+    - https://wtcsg.uat.web3.aswatson.com
+    - https://wtctw.uat.web3.aswatson.com
+    - https://wtcph.uat.web3.aswatson.com
+    - https://wtcid.uat.web3.aswatson.com
+    - https://wtcth.uat.web3.aswatson.com
+    - https://wtcvn.uat.web3.aswatson.com
+    - https://uat-watsons.s3.ap-southeast-1.amazonaws.com/
+    - https://uat-watsons.omnichat.ai/
+    - https://wtcth.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+    - https://wtcth.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+    - https://wtchk.cmb8j9fjhz-apj3aswat1-p2-public.model-t.cc.commerce.ondemand.com
+    preflight_continue: false
+  enabled: true
+  name: cors
+  protocols:
+  - grpc
+  - grpcs
+  - http
+  - https
+routes:
+- https_redirect_status_code: 426
+  name: E2AWebView1
+  path_handling: v0
+  paths:
+  - /e2a/v2/webview
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      key_in_body: false
+      key_in_header: true
+      key_in_query: true
+      key_names:
+      - apikey
+      run_on_preflight: true
+    enabled: true
+    instance_name: E2AWebView1-key-auth
+    name: key-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  - config:
+      access:
+      - |-
+        local response = {connectionString= "Endpoint=sb://LookPHNotification.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=7ysJptkjx2IPiBTDn30Gl0EMBcl4autSA4aDeLLg+4g=", hubName= "LookPHNotificationHub"}
+        local param = kong.request.get_query_arg("appId")
+
+        if param == "look" then
+        return kong.response.exit(200, response)
+        else
+        return kong.response.exit(200, {})
+        end
+      body_filter: []
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: E2AWebView1-post-function
+    name: post-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  preserve_host: false
+  protocols:
+  - http
+  - https
+  regex_priority: 0
+  request_buffering: true
+  response_buffering: true
+  strip_path: true
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: api.bing.microsoft.com
+  name: E2AAutoCorrectionBing1
+  path: /v7.0/spellcheck
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: E2AAutoCorrectionBing1
+    path_handling: v0
+    paths:
+    - ~/ai/v1/search/(?<bu>[^/]+)/spellcheck
+    plugins:
+    - config:
+        credentials: false
+        exposed_headers: null
+        headers:
+        - Origin, content-type, accept, authorization, cache-control, x-anonymous-consents,
+          x-profile-tag-debug, x-consent-reference, occ-personalization-id, occ-personalization-time,
+          pragma, expires, if-modified-since, vary, queueittoken, queueit-target,
+          apikey, saleschannel, User-Agent, X-JWT-HASH, X-LASTLOGINTIME, X-REGTIME
+        max_age: null
+        methods:
+        - GET
+        - HEAD
+        - PUT
+        - PATCH
+        - POST
+        - DELETE
+        - OPTIONS
+        - TRACE
+        - CONNECT
+        origins:
+        - http://localhost:4000
+        - http://localhost:4200
+        - http://localhost:3000
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtcsg.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcsg.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcmy.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcmy.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcph.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcph.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcid.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcid.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://pnshk.cmb8j9fjhz-apj2aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://pnshk.cmb8j9fjhz-apj2aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://www.watsons.vn
+        - https://www.watsons.com.hk
+        - https://www.watsons.com.my
+        - https://www.watsons.com.sg
+        - https://www.watsons.com.tw
+        - https://www.watsons.com.ph
+        - https://www.watsons.co.id
+        - https://www.watsons.co.th
+        - https://www.parknshop.com
+        - https://oocommapi-dev.aswatson.com
+        - https://vision.googleapis.com
+        - https://wtchk.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.uat.wingwongwow.com
+        - https://wtcph.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.uat.web3.aswatson.com
+        - https://wtcmy.uat.web3.aswatson.com
+        - https://wtcsg.uat.web3.aswatson.com
+        - https://wtctw.uat.web3.aswatson.com
+        - https://wtcph.uat.web3.aswatson.com
+        - https://wtcid.uat.web3.aswatson.com
+        - https://wtcth.uat.web3.aswatson.com
+        - https://wtcvn.uat.web3.aswatson.com
+        - https://uat-watsons.s3.ap-southeast-1.amazonaws.com/
+        - https://uat-watsons.omnichat.ai/
+        - https://wtcth.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+        - https://uat-pages.omnichat.ai
+        - https://pages.omnichat.ai
+        preflight_continue: false
+      enabled: true
+      instance_name: E2AAutoCorrectionBing1-cors
+      name: cors
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        anonymous: null
+        hide_credentials: false
+        key_in_body: false
+        key_in_header: true
+        key_in_query: true
+        key_names:
+        - apikey
+        run_on_preflight: true
+      enabled: true
+      instance_name: E2AAutoCorrectionBing1-key-auth
+      name: key-auth
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    - config:
+        access: []
+        body_filter:
+        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: E2AAutoCorrectionBing1-post-function
+      name: post-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        access:
+        - |-
+          kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+          local path = kong.request.get_path()
+        body_filter: []
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: E2AAutoCorrectionBing1-pre-function
+      name: pre-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        add:
+          body: []
+          headers:
+          - Ocp-Apim-Subscription-Key:59fa49e123454f3e8b527df9988509c5
+          json_types: []
+          querystring:
+          - setLang:request.querystring.lang
+          - mode:spell
+          - mkt:request.querystring.lang
+          - text:request.querystring.text
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers:
+          - origin
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: null
+      enabled: true
+      instance_name: E2AAutoCorrectionBing1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: api.omnichat.ai
+  name: E2AOmniChat1
+  path: /restapi/v1/pixel/events
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: E2AOmniChat1
+    path_handling: v0
+    paths:
+    - ~/e2a/v2/socialmedia/(?<bu>[^/]+)
+    plugins:
+    - config:
+        credentials: false
+        exposed_headers: null
+        headers:
+        - origin, content-type, accept, authorization, cache-control, x-anonymous-consents,
+          x-profile-tag-debug, x-consent-reference, occ-personalization-id, occ-personalization-time,
+          pragma, expires, if-modified-since, vary, queueittoken, queueit-target,
+          apikey, saleschannel, User-Agent, X-JWT-HASH, X-LASTLOGINTIME, X-REGTIME
+        max_age: null
+        methods:
+        - GET
+        - HEAD
+        - PUT
+        - PATCH
+        - POST
+        - DELETE
+        - OPTIONS
+        - TRACE
+        - CONNECT
+        origins:
+        - http://localhost:80
+        - http://localhost:8080
+        - http://localhost:4000
+        - http://localhost:4200
+        - http://localhost:3000
+        - https://localhost:3000
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtcsg.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcsg.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcmy.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcmy.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcph.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcph.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcid.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcid.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://pnshk.cmb8j9fjhz-apj2aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://pnshk.cmb8j9fjhz-apj2aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://www.watsons.vn
+        - https://www.watsons.com.hk
+        - https://www.watsons.com.my
+        - https://www.watsons.com.sg
+        - https://www.watsons.com.tw
+        - https://www.watsons.com.ph
+        - https://www.watsons.co.id
+        - https://www.watsons.co.th
+        - https://www.parknshop.com
+        - https://oocommapi-dev.aswatson.com
+        - https://vision.googleapis.com
+        - https://wtchk.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.uat.wingwongwow.com
+        - https://wtcph.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.uat.web3.aswatson.com
+        - https://wtcmy.uat.web3.aswatson.com
+        - https://wtcsg.uat.web3.aswatson.com
+        - https://wtctw.uat.web3.aswatson.com
+        - https://wtcph.uat.web3.aswatson.com
+        - https://wtcid.uat.web3.aswatson.com
+        - https://wtcth.uat.web3.aswatson.com
+        - https://wtcvn.uat.web3.aswatson.com
+        - https://uat-watsons.s3.ap-southeast-1.amazonaws.com/
+        - https://uat-watsons.omnichat.ai/
+        - https://wtcth.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+        - https://uat-pages.omnichat.ai
+        - https://pages.omnichat.ai
+        preflight_continue: false
+      enabled: true
+      instance_name: E2AOmniChat1-cors
+      name: cors
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        anonymous: null
+        hide_credentials: false
+        key_in_body: false
+        key_in_header: true
+        key_in_query: true
+        key_names:
+        - apikey
+        run_on_preflight: true
+      enabled: true
+      instance_name: E2AOmniChat1-key-auth
+      name: key-auth
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    - config:
+        access: []
+        body_filter:
+        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+        certificate: []
+        header_filter:
+        - |-
+          local origin= kong.ctx.shared.foo
+          if origin then
+          kong.response.set_header("Access-Control-Allow-Origin", origin)
+          end
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: E2AOmniChat1-post-function
+      name: post-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        access:
+        - "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())\nlocal
+          path = kong.request.get_path()\nlocal host = kong.request.get_host()\n\nlocal
+          originText = kong.request.get_header(\"origin\") \nif originText then\nkong.ctx.shared.foo=
+          originText \nend\n\nif host == \"oocommapi2-dev.aswatson.com\" then\nif
+          string.find(path,'wtchk') then\nkong.service.request.add_header(\"Authorization\",
+          \"Bearer \tkQEJrjGp5sxL2jA6pPOhHRlel70BTU3rzmgPms79oxVZzlaxqE6aH8LhKDFP5oCr\")\nend\nif
+          string.find(path,'wtctw') then\nkong.service.request.add_header(\"Authorization\",
+          \"Bearer  tbJoBIBUegepOpcOSstvJP8B4HgNDETXQBuqQp83Ozto4Gs2gDJyiU6pEOyX9siJ\")\nend\nend\n\nif
+          host == \"oocommapi2.aswatson.com\" then\nif string.find(path,'wtchk') then\nkong.service.request.add_header(\"Authorization\",
+          \"Bearer MH8OkIUr567Izs6sIJhj2XWKkPCplBhqLlC7DeV5jGT2okvlhvZF8rWd9VyTWk3g\")\nend\nif
+          string.find(path,'wtctw') then\nkong.service.request.add_header(\"Authorization\",
+          \"Bearer  ZYaj7yiVoK0SkGa9pE0n6Tgc5nX0zhcrQLJrDFmtesJu3sVJGqzrPTNtRuav28xt\")\nend\nend"
+        body_filter: []
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: E2AOmniChat1-pre-function
+      name: pre-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        day: 86400
+        error_code: 429
+        error_message: API rate limit exceeded
+        fault_tolerant: true
+        header_name: null
+        hide_client_headers: false
+        hour: null
+        limit_by: ip
+        minute: 30
+        month: null
+        path: null
+        policy: local
+        redis_database: 0
+        redis_host: null
+        redis_password: null
+        redis_port: 6379
+        redis_server_name: null
+        redis_ssl: false
+        redis_ssl_verify: false
+        redis_timeout: 2000
+        redis_username: null
+        second: null
+        year: null
+      enabled: false
+      instance_name: E2AOmniChat1-rate-limiting
+      name: rate-limiting
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        add:
+          body: []
+          headers:
+          - 'Content-Type: application/json; charset=utf-8'
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers:
+          - origin
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: null
+      enabled: true
+      instance_name: E2AOmniChat1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: graph.facebook.com
+  name: FacebookCampaign
+  path: /v16.0/615476175604718/events
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: FacebookCampaign
+    path_handling: v0
+    paths:
+    - ~/oo/v1/socialmedia/(?<bu>[^/]+)
+    plugins:
+    - config:
+        credentials: false
+        exposed_headers: null
+        headers:
+        - Origin, content-type, accept, authorization, cache-control, x-anonymous-consents,
+          x-profile-tag-debug, x-consent-reference, occ-personalization-id, occ-personalization-time,
+          pragma, expires, if-modified-since, vary, queueittoken, queueit-target,
+          apikey, saleschannel, User-Agent, X-JWT-HASH, X-LASTLOGINTIME, X-REGTIME
+        max_age: null
+        methods:
+        - GET
+        - HEAD
+        - PUT
+        - PATCH
+        - POST
+        - DELETE
+        - OPTIONS
+        - TRACE
+        - CONNECT
+        origins:
+        - http://localhost:4000
+        - http://localhost:4200
+        - http://localhost:3000
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtcsg.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcsg.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcmy.cmb8j9fjhz-apj3aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcmy.cmb8j9fjhz-apj3aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcph.cmb8j9fjhz-apj4aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcph.cmb8j9fjhz-apj4aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcth.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcid.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcid.cmb8j9fjhz-aswatsona1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://pnshk.cmb8j9fjhz-apj2aswat1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://pnshk.cmb8j9fjhz-apj2aswat1-d1-public.model-t.cc.commerce.ondemand.com
+        - https://www.watsons.vn
+        - https://www.watsons.com.hk
+        - https://www.watsons.com.my
+        - https://www.watsons.com.sg
+        - https://www.watsons.com.tw
+        - https://www.watsons.com.ph
+        - https://www.watsons.co.id
+        - https://www.watsons.co.th
+        - https://www.parknshop.com
+        - https://oocommapi-dev.aswatson.com
+        - https://vision.googleapis.com
+        - https://wtchk.cmb8j9fjhz-aswatsona1-s4-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtctw.uat.wingwongwow.com
+        - https://wtcph.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtcvn.cmb8j9fjhz-aswatsona1-s1-public.model-t.cc.commerce.ondemand.com
+        - https://wtcvn.cmb8j9fjhz-aswatsona1-s2-public.model-t.cc.commerce.ondemand.com
+        - https://wtcvn.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-s3-public.model-t.cc.commerce.ondemand.com
+        - https://wtchk.cmb8j9fjhz-apj3aswat1-p2-public.model-t.cc.commerce.ondemand.com
+        preflight_continue: false
+      enabled: true
+      instance_name: FacebookCampaign-cors
+      name: cors
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        anonymous: null
+        hide_credentials: false
+        key_in_body: false
+        key_in_header: true
+        key_in_query: true
+        key_names:
+        - apikey
+        run_on_preflight: true
+      enabled: true
+      instance_name: FacebookCampaign-key-auth
+      name: key-auth
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    - config:
+        access: []
+        body_filter:
+        - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: FacebookCampaign-post-function
+      name: post-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        access:
+        - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+        body_filter: []
+        certificate: []
+        header_filter: []
+        log: []
+        rewrite: []
+        ws_client_frame: []
+        ws_close: []
+        ws_handshake: []
+        ws_upstream_frame: []
+      enabled: true
+      instance_name: FacebookCampaign-pre-function
+      name: pre-function
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        day: 86400
+        error_code: 429
+        error_message: API rate limit exceeded
+        fault_tolerant: true
+        header_name: null
+        hide_client_headers: false
+        hour: null
+        limit_by: ip
+        minute: 30
+        month: null
+        path: null
+        policy: local
+        redis_database: 0
+        redis_host: null
+        redis_password: null
+        redis_port: 6379
+        redis_server_name: null
+        redis_ssl: false
+        redis_ssl_verify: false
+        redis_timeout: 2000
+        redis_username: null
+        second: null
+        year: null
+      enabled: false
+      instance_name: FacebookCampaign-rate-limiting
+      name: rate-limiting
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
+        add:
+          body: []
+          headers:
+          - 'Content-Type: application/json; charset=utf-8'
+          json_types: []
+          querystring:
+          - access_token:$((function()     local BU = uri_captures['bu']     if BU
+            == 'wtchk' then       return"EAAMUBXAKTuABABiYu7wZCKHEfeZBzrzBpUPcp3fTv3zRhD7Fgl1EPJUFOkVM7msyrJZC5xjdtJtxepnF7Xqq0ROHPILtfsNrROXeq1WxTz8gFZAHHt9X5ZBFwqNJ5oYy2ohEN7ia2ZA0MpTAGhiJabgp4rC4fEW2slcZAyToKggK29f6mlribHqCI3QJ59J1esZD"     end     if
+            BU == 'wtcid' then       return"EAAOLFv6d0IQBAMYrm8h4OtIfzHWtcAivZBhFZB8pUK0wMBdZA0llvwD1ZBO2081BURq5qjvPWtLA5JK4NSZA2Pzxfjl8NFJFpyfnas8BBsgFO24ZC18k6ol46ZAnfVfJwsHbjvKm34R1oJLZAdY9sNV72MdPaI2lNZAgkPH5wRqkQ7QoH4oUZAfoskhZCAN2ZBSqAiYZD"     end     if
+            BU == 'wtcmy' then       return"EAAJei5xkGcQBAN8469ZAdz1Q5No0SEdMtOxmaBTOnyogsRxZAnjO2NoPAo6ZANpK2OOsSbSSPI8rBPFRwN76WnnZC5bTAuoSIZBBekkpjZAwiPTCsLLi5jmcvZCRqZB28N6ZAsGZB1nhwRZBtZCJbZCSZC4VZCLIYrdhjpCrzs1Bok3G9nBgyBxfZA1nPAgqVzF552MctBAZD"     end     if
+            BU == 'wtcsg' then       return"EAASNqUtLZBjoBAGjmNRma6d6ZBcxwVbEShv10AwNLcpSZB5qRFygG5iF7nHsM1f0od9kRUI2GgfuNkkT4XuggZCu6cTTnJhUCknZAzuOMaI7S4HAllq4zmASpTrtkXofap3dcEIN8V5eEr78baueJpOXlB2rFtNnmeLvYStGUab51gG7Kr1NuIlaxOL27w1QZD"     end     if
+            BU == 'wtcth' then       return"EAAUaOEW5Dj0BAMZBBlFSyVkcMUdrCybgdf2uoATrVTyOIKDjZCXdqgYhDpQq8zcrzgG33ej0a6Xg4pKScU2gag3ak3DDQKiu5biUh3XscAkwgGmTcbrRs2WRAvr7KK70m09HWpaZCAKJvqpJEuOwyLZAexQq6ull3yMuBbW4zZBO6O20EyeIjFLWkFO2lFdMZD"     end     if
+            BU == 'wtctw' then       return"EAAFdzOCZAPV4BAIEbMXZB1zW8V4E0peDeXgrZCZBzyQQthkThOzGwA74INuweY81lcyVtYQ7P1Hcf7MrGYNGYg77tysg7VnLuoL99Nevl4nZBg2cAK2dbH3Hjr1tpZC5rBKgmb6ckspZAZBP3VsaPWnarPJ9eb0R3n3NXpIlKw98sAZB5yxtJ8779fe11YVqFjG0ZD"     end     if
+            BU == 'wtcvn' then       return"EAAEGg6YxDKoBAETDHjYg9XQGlGBjlT84wDkEaHK7ZC7kldgJp4RllVQaHV4JZBx2MHFQDi6lpspJhl1bP01dBjYeyWWERimHv2vOxT0RWcC5HXEKuxkqNqAbBZAoNhm4blEZBv1TGKKdGFbPKDdjRyQ6vXBUQVhQZBezoZA3TtjGEb9Jg0RZCXdyRbJxe7ZCILkZD"     end     if
+            BU == 'wtcph' then       return"EAAmykWYi9JABAIgUPgTnStMpFUSDsSLWpZCYz5KDlk0ASOtLQoKNTQSB3ogSuk0MJQbbNSTNt38qc6GiToCoIv3ZCWZC1hhThUj8OzHQZASdJrM30ZBrmZBP2ifqRgo1qZBKk7HJktmEuoNGLHSowdAEMtXDaB6bZB6RTSkUxpnmFOpYAnb3mlKa3VqRHrJZC0zYZD"     end   end
+            )())
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /v16.0/$((function()     local BU = uri_captures['bu']     if BU ==
+            'wtchk' then       return "126964270428938"     end     if BU == 'wtcid'
+            then       return "1496318723762473"     end     if BU == 'wtcmy' then       return
+            "245828331528750"     end     if BU == 'wtcsg' then       return "674853841352769"     end     if
+            BU == 'wtcth' then       return "132761944076775"     end     if BU ==
+            'wtctw' then       return "678342529341708"     end     if BU == 'wtcvn'
+            then       return "460483311445627"     end     if BU == 'wtcph' then       return
+            "1362630697090304"     end   end )())/events
+      enabled: true
+      instance_name: FacebookCampaign-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: graph.instagram.com
+  name: InstagramAccountPost
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      key_in_body: false
+      key_in_header: true
+      key_in_query: true
+      key_names:
+      - apikey
+      run_on_preflight: true
+    enabled: true
+    instance_name: InstagramGetToken-key-auth
+    name: key-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  - config:
+      access: []
+      body_filter:
+      - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: InstagramAccountPost-post-function
+    name: post-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: InstagramAccountPost
+    path_handling: v0
+    paths:
+    - ~/instagram/me/media
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring:
+          - fields:caption,id,media_type,media_url,permalink,thumbnail_url,timestamp,username
+          - access_token:IGQVJYd2NOWThWM2lxM2pJcktQcnJxazRQd1ZAZAdzVmdUFBZAmt2QW9fWlBsSW9CODRYOTl3NzVneVJUeGZApU1lNeEdiQWdJT0hyLWdPVDFtRy1taHRuVkRJeW9IMERvZAHN1N0NkVmhDSWU4ek1IZAHpUVwZDZD
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /me/media
+      enabled: true
+      instance_name: InstagramAccountPost-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: InstagramAccountPostMediaList
+    path_handling: v0
+    paths:
+    - ~/instagram/media/(?<media_id>[^/]+)/children
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring:
+          - fields:media_type,media_url,id
+          - access_token:IGQVJYd2NOWThWM2lxM2pJcktQcnJxazRQd1ZAZAdzVmdUFBZAmt2QW9fWlBsSW9CODRYOTl3NzVneVJUeGZApU1lNeEdiQWdJT0hyLWdPVDFtRy1taHRuVkRJeW9IMERvZAHN1N0NkVmhDSWU4ek1IZAHpUVwZDZD
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /$(uri_captures['media_id'])/children
+      enabled: true
+      instance_name: InstagramAccountPostMediaList-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: InstagramAccountPostWithMediaId
+    path_handling: v0
+    paths:
+    - ~/instagram/user/(?<user_id>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring:
+          - fields:caption,id,media_type,media_url,permalink,thumbnail_url,timestamp,username
+          - access_token:IGQVJYd2NOWThWM2lxM2pJcktQcnJxazRQd1ZAZAdzVmdUFBZAmt2QW9fWlBsSW9CODRYOTl3NzVneVJUeGZApU1lNeEdiQWdJT0hyLWdPVDFtRy1taHRuVkRJeW9IMERvZAHN1N0NkVmhDSWU4ek1IZAHpUVwZDZD
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /$(uri_captures['user_id'])
+      enabled: true
+      instance_name: InstagramAccountPostWithMediaId-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
