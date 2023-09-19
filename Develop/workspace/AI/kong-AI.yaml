@@ -444,6 +444,109 @@ services:
   retries: 5
   routes:
   - https_redirect_status_code: 426
+    name: E2ABeautyAssistant1-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v3/beautyassistant/chatbot/config/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/beautyAssistant/chatbot/config
+      enabled: true
+      instance_name: E2ABeautyAssistant1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: GetCategoryTagging1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/category/tag/(?<bu>[^/]+)/(?<categoryCode>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers:
+          - bu:$(uri_captures['bu'])
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/multilang/categoryKeyword/$(uri_captures['categoryCode'])
+      enabled: true
+      instance_name: GetCategoryTagging1-request-transformer-advance
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
     name: GetColorOfTheYear1
     path_handling: v0
     paths:
