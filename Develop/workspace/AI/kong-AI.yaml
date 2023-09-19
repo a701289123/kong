@@ -442,7 +442,7 @@ services:
   protocol: https
   read_timeout: 60000
   retries: 5
-  routes:  
+  routes:
   - https_redirect_status_code: 426
     name: GetColorOfTheYear1
     path_handling: v0
