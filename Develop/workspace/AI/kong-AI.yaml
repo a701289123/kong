@@ -1546,6 +1546,57 @@ services:
     response_buffering: true
     strip_path: true
   - https_redirect_status_code: 426
+    name: GetSimilarConcernProduct1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/similarConcern/(?<bu>[^/]+)/(?<concernId>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/beautyprofile/similarConcern/$(uri_captures['concernId'])
+      enabled: true
+      instance_name: GetSimilarConcernProduct1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
     name: GetSimiliarityProductRecommendation1
     path_handling: v0
     paths:
@@ -2540,6 +2591,57 @@ services:
           uri: /api/$(uri_captures['bu'])/categorycomm/recency
       enabled: true
       instance_name: PostSearchPersonalization1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostSimilarConcern1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/similarConcern/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/beautyprofile/similarConcern
+      enabled: true
+      instance_name: PostSimilarConcern1-request-transformer-advanced
       name: request-transformer-advanced
       protocols:
       - grpc
