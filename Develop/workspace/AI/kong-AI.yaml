@@ -7,6 +7,90 @@ _workspace: AI
 services:
 - connect_timeout: 60000
   enabled: true
+  host: c3c8cf37-37f0-43ed-b27d-903af7a5fa48.azurewebsites.net
+  name: E2ABeautyAssistant1-AI
+  path: /chat
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      key_in_body: false
+      key_in_header: true
+      key_in_query: true
+      key_names:
+      - apikey
+      run_on_preflight: true
+    enabled: true
+    instance_name: E2ABeautyAssistant1-AI-key-auth
+    name: key-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  - config:
+      access: []
+      body_filter:
+      - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: E2ABeautyAssistant1-AI-post-function
+    name: post-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      access:
+      - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+      body_filter: []
+      certificate: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: E2ABeautyAssistant1-AI-pre-function
+    name: pre-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: E2ABeautyAssistant2-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyassistant/chatbot/chat/(?<bu>[^/]+)
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
   host: mmedia.app.aswatson.com
   name: E2ABeautyProfile3-AI
   plugins:
@@ -253,6 +337,10 @@ services:
         kong.service.request.add_header("x-functions-key", "cwO5GdE6tgM7XbsJnYbadPdHo65iFTyxparEpl-Iv4hfAzFumwluYQ==")
         kong.service.request.add_header("bu", "wtcvn")
         end
+        if string.find(path,'wtctr') then
+        kong.service.request.add_header("x-functions-key", "cnxCT7KGPz3353r4lgYc4N4WMiK_s3cbOQn2UMG1KkFYAzFuljqEWw==")
+        kong.service.request.add_header("bu", "wtctr")
+        end
       body_filter: []
       certificate: []
       header_filter: []
@@ -340,6 +428,9 @@ services:
       - condition:
           bu: pnshk
         upstream_name: PNSHK-o2ai
+      - condition:
+          bu: wtctr
+        upstream_name: WTCTR-o2ai
     enabled: true
     name: route-by-header
     protocols:
@@ -1404,6 +1495,57 @@ services:
     response_buffering: true
     strip_path: true
   - https_redirect_status_code: 426
+    name: GetSimilarConcernProduct1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/similarConcern/(?<bu>[^/]+)/(?<concernId>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/beautyprofile/similarConcern/$(uri_captures['concernId'])
+      enabled: true
+      instance_name: GetSimilarConcernProduct1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
     name: GetSimiliarityProductRecommendation1
     path_handling: v0
     paths:
@@ -1669,6 +1811,21 @@ services:
     - ~/ai/v2/beautyprofile/flipCards/(?<bu>[^/]+)
     plugins:
     - config:
+        body: null
+        content_type: null
+        echo: false
+        message: Route disable!
+        status_code: 404
+        trigger: null
+      enabled: true
+      instance_name: PostFlipCard1-AI-request-termination
+      name: request-termination
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
         add:
           body: []
           headers:
@@ -1700,6 +1857,57 @@ services:
           uri: /api/$(uri_captures['bu'])/flipCards
       enabled: true
       instance_name: PostReviewFlipCard1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostFlipCard3-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v3/beautyprofile/flipCards/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/v3/$(uri_captures['bu'])/flipCards
+      enabled: true
+      instance_name: PostFlipCard3-AI-request-transformer-advanced
       name: request-transformer-advanced
       protocols:
       - grpc
@@ -2184,6 +2392,21 @@ services:
     - ~/ai/v2/beautyprofile/reviewFlipCard/(?<bu>[^/]+)
     plugins:
     - config:
+        body: null
+        content_type: null
+        echo: false
+        message: Route disable!
+        status_code: 404
+        trigger: null
+      enabled: true
+      instance_name: PostReviewFlipCard1-AI-request-termination
+      name: request-termination
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    - config:
         add:
           body: []
           headers:
@@ -2215,6 +2438,57 @@ services:
           uri: /api/$(uri_captures['bu'])/reviewFlipCard
       enabled: true
       instance_name: PostFlipCard1-AI-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostReviewFlipCard3-AI
+    path_handling: v0
+    paths:
+    - ~/ai/v3/beautyprofile/reviewFlipCard/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/v3/$(uri_captures['bu'])/reviewFlipCard
+      enabled: true
+      instance_name: PostReviewFlipCard3-AI-request-transformer-advanced
       name: request-transformer-advanced
       protocols:
       - grpc
@@ -2266,6 +2540,57 @@ services:
           uri: /api/$(uri_captures['bu'])/categorycomm/recency
       enabled: true
       instance_name: PostSearchPersonalization1-request-transformer-advanced
+      name: request-transformer-advanced
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  - https_redirect_status_code: 426
+    name: PostSimilarConcern1
+    path_handling: v0
+    paths:
+    - ~/ai/v2/beautyprofile/similarConcern/(?<bu>[^/]+)
+    plugins:
+    - config:
+        add:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        allow:
+          body: null
+        append:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+        dots_in_keys: true
+        http_method: null
+        remove:
+          body: []
+          headers: []
+          querystring: []
+        rename:
+          body: []
+          headers: []
+          querystring: []
+        replace:
+          body: []
+          headers: []
+          json_types: []
+          querystring: []
+          uri: /api/$(uri_captures['bu'])/beautyprofile/similarConcern
+      enabled: true
+      instance_name: PostSimilarConcern1-request-transformer-advanced
       name: request-transformer-advanced
       protocols:
       - grpc
@@ -2764,6 +3089,75 @@ upstreams:
   slots: 10000
   targets:
   - target: func-o2ai-wtcth-prod-eastasia.azurewebsites.net:443
+    weight: 100
+- algorithm: round-robin
+  hash_fallback: none
+  hash_on: none
+  hash_on_cookie_path: /
+  healthchecks:
+    active:
+      concurrency: 10
+      healthy:
+        http_statuses:
+        - 200
+        - 302
+        interval: 0
+        successes: 0
+      http_path: /
+      https_verify_certificate: true
+      timeout: 1
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 404
+        - 500
+        - 501
+        - 502
+        - 503
+        - 504
+        - 505
+        interval: 0
+        tcp_failures: 0
+        timeouts: 0
+    passive:
+      healthy:
+        http_statuses:
+        - 200
+        - 201
+        - 202
+        - 203
+        - 204
+        - 205
+        - 206
+        - 207
+        - 208
+        - 226
+        - 300
+        - 301
+        - 302
+        - 303
+        - 304
+        - 305
+        - 306
+        - 307
+        - 308
+        successes: 0
+      type: http
+      unhealthy:
+        http_failures: 0
+        http_statuses:
+        - 429
+        - 500
+        - 503
+        tcp_failures: 0
+        timeouts: 0
+    threshold: 0
+  name: WTCTR-o2ai
+  slots: 10000
+  targets:
+  - target: func-o2ai-wtctr-prod-eastasia.azurewebsites.net:443
     weight: 100
 - algorithm: round-robin
   hash_fallback: none
