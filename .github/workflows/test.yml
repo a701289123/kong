@@ -61,16 +61,19 @@ jobs:
     - name: backup-js
       run: sudo find /usr/local/kong/js-plugins/ -path /usr/local/kong/js-plugins/node_modules -prune -o -name "*.js" -exec cp -t ./backup-js/ {} +
 
-    # - name: Change permissions
-    #   run: sudo chmod -R 777 ./backup-js/
-
     - name: copyfile-js
-      run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/    
+      run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/
 
     - name: Run npm install in 
       run: |
         cd /usr/local/kong/js-plugins
         sudo npm install
+
+    - name: backup-errorPage
+      run: sudo cp -f /etc/kong/errorPage.html ./errorPagebackup.html
+
+    - name: copyfile-errorPage
+      run: sudo cp -f ./Develop/setting/errorPage/errorPage.html /etc/kong/errorPage.html
 
     - name: backup-conf
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
@@ -80,6 +83,10 @@ jobs:
 
     - name: restart kong
       run: sudo systemctl restart kong
+
+    - name: Back errorPage
+      if: ${{ failure() }}
+      run: sudo cp -f ./errorPagebackup.html /etc/kong/errorPage.html
 
     - name: Back kogconf
       if: ${{ failure() }}
@@ -116,9 +123,6 @@ jobs:
     - name: backup-js
       run: sudo find /usr/local/kong/js-plugins/ -path /usr/local/kong/js-plugins/node_modules -prune -o -name "*.js" -exec cp -t ./backup-js/ {} +
 
-    # - name: Change permissions
-    #   run: sudo chmod -R 777 ./backup-js/
-
     - name: copyfile-js
       run: sudo cp -rf ./Develop/plugin/* /usr/local/kong/js-plugins/
 
@@ -126,6 +130,12 @@ jobs:
       run: |
         cd /usr/local/kong/js-plugins
         sudo npm install
+
+    - name: backup-errorPage
+      run: sudo cp -f /etc/kong/errorPage.html ./errorPagebackup.html
+
+    - name: copyfile-errorPage
+      run: sudo cp -f ./Develop/setting/errorPage/errorPage.html /etc/kong/errorPage.html
 
     - name: backup-conf
       run: sudo cp -f /etc/kong/kong.conf ./kongbackup.conf
@@ -138,6 +148,10 @@ jobs:
 
     - name: Delete checked-out files
       run: sudo rm -rf *
+
+    - name: Back errorPage
+      if: ${{ failure() }}
+      run: sudo cp -f ./errorPagebackup.html /etc/kong/errorPage.html
 
     - name: Back kogconf
       if: ${{ failure() }}
@@ -167,17 +181,8 @@ jobs:
         sudo cp -f ./kongbackup.conf /etc/kong/kong.conf
         sudo cp -rf ./backup-js/* /usr/local/kong/js-plugins
         sudo systemctl restart kong
-        sudo rm -rf *
-  # test-job:
-  #   needs: [deploy-cp,deploy-dp]
-  #   runs-on: kong
-  #   name: back job echo
-  #   if: always()
-  #   steps:
-  #   - name: Run backup
-  #     if: needs.deploy-cp.result == 'failure' || needs.deploy-dp.result == 'failure'
-  #     run: |       
-  #       echo 123
+        sudo rm -rf *  
+
   deploy-workspace-AI:  
     needs: deploy-dp
     runs-on: kong
