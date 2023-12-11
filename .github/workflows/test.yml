@@ -2,7 +2,7 @@ name: Run Deploying dev
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '50 7 * * *'
 
 
 jobs:
