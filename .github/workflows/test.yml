@@ -294,12 +294,20 @@ jobs:
   #         DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
   #         DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
 
+  # clear-checked-out-files:
+  #     needs: [deploy-workspace-AI,deploy-workspace-OO]
+  #     runs-on: kong
+  #     name: clear flows
+  #     environment: play
+  #     steps:
+  #     - name: Delete checked-out files
+  #       run: sudo rm -rf *
+
   clear-checked-out-files:
-      needs: [deploy-workspace-AI,deploy-workspace-OO]
+      needs: [deploy-workspace-df]
       runs-on: kong
       name: clear flows
       environment: play
       steps:
       - name: Delete checked-out files
         run: sudo rm -rf *
-        
