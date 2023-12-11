@@ -2,7 +2,7 @@ name: Run Deploying dev
 on:
   workflow_dispatch:
   schedule:
-    - cron: '5 8 * * *'
+    - cron: '25 8 * * *'
 
 
 jobs:
@@ -23,6 +23,14 @@ jobs:
           fi
       - name: check conf
         run: sudo kong check ./Develop/setting/uat/cp/kong.conf
+      - name: backup-deck yaml
+        run: |
+          DATE=$(date +%Y%m%d)
+          deck dump -o /etc/kong/github/backup/kong-dev-backup-$DATE.yaml --yes --tls-skip-verify
+        env:
+          DECK_KONG_ADDR: ${{ secrets.KONG_ADMIN_API_URL }}
+          DECK_HEADERS: ${{ secrets.KONG_DECK_HEADERS }}
+
 
   check-dp-disk-space-conf:
     needs: check-cp-disk-space-conf
